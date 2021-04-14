@@ -85,6 +85,11 @@ const Menu = ({ history }) => (
           </span>
         </li>
       )}
+      <li className="nav-item">
+        <Link style={currentTab(history, "/about")} className="nav-link" to="/about">
+          About
+        </Link>
+      </li>
     </ul>
   </div>
 );
