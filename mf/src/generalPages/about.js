@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Base from "../core/Base";
 import { Redirect } from "react-router-dom";
+import aboutImage from '../assets/aboutImages.jpeg'
 
 const About = () => {
     return (
         <Base title="" description="">
             <div className="container">
-                <h6 style={{ color: 'white' }}> Online learning is booming in current times.
+            <img class="img-fluid rounded mx-auto d-block" src={aboutImage} alt="E-Learning" />
+                <h6 className="m-3" style={{ color: 'white' }} >
+                Online learning is booming in current times.
                 Aided by the widespread availability of high-speed internet, making use of new technologies
                 such as 4G and the soon-to-be-released 5G,
                 online learning is expected to grow by leaps and bounds in the foreseeable future.
