@@ -14,7 +14,6 @@ const orderRoutes = require("./routes/order");
 const paymentBRoutes = require("./routes/paymentBRoutes");
 
 
-
 //DB CONNECTION
 mongoose
   .connect(process.env.DATABASE, {
@@ -39,7 +38,7 @@ app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", paymentBRoutes);
 //PORT
-const port = process.env.PORT || 5051;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`app is running at ${port}`);
