@@ -15,7 +15,6 @@ const paymentBRoutes = require("./routes/paymentBRoutes");
 const videoRoute = require("./routes/video")
 
 
-
 //DB CONNECTION
 mongoose
   .connect(process.env.DATABASE, {

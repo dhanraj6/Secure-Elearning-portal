@@ -17,6 +17,7 @@ import Cart from "./core/Cart"
 import Orders from "./admin/Orders"
 import About from "./generalPages/about"
 import ContactUs from "./generalPages/contactUs"
+import CourseDetails from "./core/courseDetails"
 
 
 const Routes = () => {
@@ -29,6 +30,7 @@ const Routes = () => {
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/cart" exact component={Cart} />
+        <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard} />
         <AdminRoute path="/admin/orders" exact component={Orders} />

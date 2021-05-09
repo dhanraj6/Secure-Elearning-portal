@@ -5,8 +5,9 @@ import { addItemToCart } from "./helper/cartHelper";
 import {removeItemFromCart} from "./helper/cartHelper"
 
  
-const Card = ({ product, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
+const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
   const [redirect, setRedirect] = useState(false);
+  const [infoRedirect, setinfoRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
 
   const cartTitle = product ? product.name : "A photo from pexels";
@@ -22,6 +23,30 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload= f 
       return <Redirect to="/cart" />;
     }
   };
+
+  const gotoInfo =()=>{
+    setinfoRedirect(true);
+  }
+
+  const redirectInfo = infoRedirect =>{
+    if(infoRedirect){
+      return <Redirect to={`/product/${product._id}`} />
+    }
+  }
+
+  const showCourseInfo = courseInfo => {
+    return (
+      courseInfo && (
+        <button
+          onClick={gotoInfo}
+          className="btn btn-block btn-outline-success mt-2 mb-2"
+        >
+          Know More
+        </button>
+      )
+    );
+  };
+
 
   const showAddToCart = addtoCart => {
     return (
@@ -56,12 +81,14 @@ const Card = ({ product, addtoCart = true, removeFromCart = false, setReload= f 
       <div className="card-header lead">{cartTitle}</div>
       <div className="card-body">
         {getARedirect(redirect)}
+        {redirectInfo(infoRedirect)}
          <ImageHelper product={product} />
         <p className="card-header lead">
           {cartDescrption}
         </p>
         <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
         <div className="row">
+          <div className="col-12">{showCourseInfo(courseInfo)}</div>
           <div className="col-12">{showAddToCart(addtoCart)}</div>
           <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>
         </div>

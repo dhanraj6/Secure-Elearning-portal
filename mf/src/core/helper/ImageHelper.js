@@ -4,7 +4,7 @@ import { API } from "../../backend";
 const ImageHelper = ({ product }) => {
   const imageurl = product
     ? `${API}/product/photo/${product._id}`
-    : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
+    : `https://cdn.pixabay.com/photo/2017/12/26/21/19/tech-3041437_960_720.jpg`;
   return (
     <div className="rounded border border-success p-2">
       <img
