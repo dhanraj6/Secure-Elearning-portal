@@ -93,7 +93,7 @@ const AddProduct = () => {
     console.log("preeeeeedone")
     
     //AddaVideo(formData, config)
-    axios.post('/video/uploadfiles', formData, config)
+    axios.post('http://localhost:8000/api/video/uploadfiles', formData, config)
         .then(response=> {
             if(response.data.success){
               
