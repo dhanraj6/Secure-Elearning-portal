@@ -12,6 +12,7 @@ router.param("productId", getProductById);
 //create route
 router.post("/product/create/:userId", isSignedin, isAuthenticated, isAdmin, createProduct);
 
+
 //read route
 router.get("/product/:productId", getProduct);
 router.get("/product/photo/:productId", photo);
@@ -28,3 +29,4 @@ router.get("/products", getAllProducts)
 router.get("/products/categories", getAllUniqueCategories)
 
 
+module.exports = router
