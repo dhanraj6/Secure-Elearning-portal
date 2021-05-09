@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const {test} = require("../controllers/test");
+
 
 
 var storage = multer.diskStorage({
@@ -27,21 +27,23 @@ var upload = multer({ storage: storage }).single("file")
 //             User
 //=================================
 
-router.post("/video/uploadfiles", (req, res) => {
+
+/* 
+router.get("/video/uploadfiles", (req, res) => {
     console.log("im here")
 } )
-
-/* router.post("video/uploadfiles", (req, res) => {
-    
-    upload(req, res, err => {
-        if (err) {
-            return res.json({ success: false, err })
-        }
-        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
-    })
-
-}); */
+ */
 
 
+ router.post("/video/uploadfiles", (req, res) => {
+     upload(req, res, err => {
+         if (err) {
+            console.log(err)
+           return res.json({ success: false, err })
+       }
+         return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
+     })
+
+}); 
 
 module.exports = router;
