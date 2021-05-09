@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
-import { getCategories, createaProduct } from "./helper/adminapicall";
+import { getCategories, createaProduct , AddaVideo} from "./helper/adminapicall";
 import { isAutheticated } from "../auth/helper/index";
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+
 
 const AddProduct = () => {
   const { user, token } = isAutheticated();
@@ -35,6 +38,8 @@ const AddProduct = () => {
     getaRedirect,
     formData
   } = values;
+
+  const [FilePath, setFilePath] = useState("")
 
   const preload = () => {
     getCategories().then(data => {
@@ -78,6 +83,34 @@ const AddProduct = () => {
     setValues({ ...values, [name]: value });
   };
 
+  const onDrop = ( files ) => {
+    let formData = new FormData();
+    const config = {
+        header: { 'content-type': 'multipart/form-data' }
+    }
+    console.log(files)
+    formData.append("file", files[0])
+    console.log("preeeeeedone")
+    
+    //AddaVideo(formData, config)
+    axios.post('/video/uploadfiles', formData, config)
+        .then(response=> {
+            if(response.data.success){
+              
+                let variable = {
+                    filePath: response.data.filePath,
+                    fileName: response.data.fileName
+                }
+                setFilePath(response.data.filePath)
+
+                //gerenate thumbnail with this filepath ! 
+                
+            } else {
+                alert('failed to save the video in server')
+            }
+        })
+  }
+
   const successMessage = () => (
     <div
       className="alert alert-success mt-3"
@@ -90,17 +123,40 @@ const AddProduct = () => {
   const createProductForm = () => (
     <form>
       <span>Post video</span>
-      <div className="form-group">
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Dropzone 
+                    onDrop={onDrop}
+                    multiple={false}
+                    maxSize={800000000}>
+                    {({ getRootProps, getInputProps }) => (
+                        <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            {...getRootProps()}
+                        >
+                            <input {...getInputProps()} />
+                            {/*<Icon type="plus" style={{ fontSize: '3rem' }} />*/}
+
+                        </div>
+                    )}
+                </Dropzone>
+
+                {/* {thumbnail !== "" &&
+                    <div>
+                        <img src={`http://localhost:5000/${thumbnail}`} alt="haha" />
+                    </div>
+                } */}
+            </div>
+      {/* <div className="form-group">
         <label className="btn btn-block btn-success">
           <input
-            onChange={handleChange("photo")}
+            //onChange={handleChange("photo")}
+            onChange={onDrop("photo")}
             type="file"
             name="photo"
             accept="image"
             placeholder="choose a file"
           />
         </label>
-      </div>
+      </div>  */}
       <div className="form-group">
         <input
           onChange={handleChange("name")}

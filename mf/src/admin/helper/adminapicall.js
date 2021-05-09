@@ -76,6 +76,22 @@ export const createaProduct = (userId, token, product) => {
     .catch(err => console.log(err));
 };
 
+
+export const AddaVideo = (formData, config, token) => {
+  return fetch(`${API}/video/uploadfiles`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  }).then(response => {
+      console.log(response)
+      return response.json();
+    })
+};
+
+
 //get all products
 export const getProducts = () => {
   return fetch(`${API}/products`, {
