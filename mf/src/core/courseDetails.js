@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { getProduct } from "../admin/helper/adminapicall";
-import { isAutheticated } from "../auth/helper";
 import ImageHelper from "../core/helper/ImageHelper"
+import './style.css'
 
 const CourseDetails = ({ match }) => {
-
-    const { user, token } = isAutheticated();
-
 
     const [values, setValues] = useState({
         name: "",
@@ -28,9 +23,6 @@ const CourseDetails = ({ match }) => {
         categories,
         category,
         loading,
-        error,
-        createdProduct,
-        getRedirect,
         formData,
     } = values;
 
@@ -42,6 +34,7 @@ const CourseDetails = ({ match }) => {
             } else {
                 setValues({
                     ...values,
+                    prodId: data._id,
                     name: data.name,
                     description: data.description,
                     price: data.price,
@@ -53,20 +46,60 @@ const CourseDetails = ({ match }) => {
         });
     };
 
+
+    const contentList = () => {
+        return (
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+      Cras justo odio
+    </div>
+                    <span class="badge bg-info p-3 rounded-pill">14 </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+      Cras justo odio
+    </div>
+                    <span class="badge bg-info p-3 rounded-pill">14</span>
+                   
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+      Cras justo odio
+    </div>
+                    <span class="badge bg-info p-3 rounded-pill">14</span>
+                </li>
+            </ol>
+        )
+    }
+
     useEffect(() => {
         preload(match.params.productId);
     }, []);
 
+
     return (
-        <Base
-      title={name}
-      description=""
-      className="container bg-info p-4"
-    >
-     <p>{name}</p>
-     <p>{description}</p>
-     <ImageHelper product={match.productId} />
-    </Base>
+        <Base title="" description="" fontColor="Yellow"
+            className="bg-dark text-black p-4"
+        >
+            <div className="text-center layoutChanger">
+                <div className="col">
+                    <h1>{name}</h1>
+                    <div className="imageCard">
+                        <ImageHelper className="imageStyle" product={match.productId} />
+                    </div>
+                    <div className="containerStyle">
+                        {`${description.substring(0, 2000)}...`}
+                    </div>
+                </div>
+                <div className="container ">
+                    {contentList()}
+                </div>
+            </div>
+        </Base>
     )
 }
 

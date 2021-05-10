@@ -3,7 +3,7 @@ import ImageHelper from "./helper/ImageHelper";
 import { Redirect } from "react-router-dom";
 import { addItemToCart } from "./helper/cartHelper";
 import {removeItemFromCart} from "./helper/cartHelper"
-
+import "./style.css"
  
 const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
   const [redirect, setRedirect] = useState(false);
@@ -77,14 +77,14 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
     );
   };
   return (
-    <div className="card text-white bg-dark border border-info ">
+    <div className="card text-white bg-dark cardsStyle">
       <div className="card-header lead">{cartTitle}</div>
       <div className="card-body">
         {getARedirect(redirect)}
         {redirectInfo(infoRedirect)}
          <ImageHelper product={product} />
         <p className="card-header lead">
-          {cartDescrption}
+          {`${cartDescrption.substring(0, 200)}...`}
         </p>
         <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
         <div className="row">

@@ -71,10 +71,16 @@ const Menu = ({ history }) => (
           </li>
         </Fragment>
       )}
+      <li className="nav-item">
+        <Link style={currentTab(history, "/about")} className="nav-link" to="/about">
+          About
+        </Link>
+      </li>
+
       {isAutheticated() && (
         <li className="nav-item">
           <span
-            className="nav-link text-warning"
+            className="nav-link text-warning "
             onClick={() => {
               signout(() => {
                 history.push("/");
@@ -85,11 +91,7 @@ const Menu = ({ history }) => (
           </span>
         </li>
       )}
-      <li className="nav-item">
-        <Link style={currentTab(history, "/about")} className="nav-link" to="/about">
-          About
-        </Link>
-      </li>
+
     </ul>
   </div>
 );
