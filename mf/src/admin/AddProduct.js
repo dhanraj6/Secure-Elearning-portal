@@ -40,8 +40,7 @@ const AddProduct = () => {
   } = values;
 
   const [FilePath, setFilePath] = useState("")
-  const [Duration, setDuration] = useState("")
-  const [Thumbnail, setThumbnail] = useState("")
+  
 
   const preload = () => {
     getCategories().then(data => {
@@ -106,16 +105,6 @@ const AddProduct = () => {
                 setFilePath(response.data.filePath)
 
                 //gerenate thumbnail with this filepath ! 
-
-                axios.post('http://localhost:8000/api/video/thumbnail', variable)
-                .then(response => {
-                    if(response.data.success) {
-                        setDuration(response.data.fileDuration)
-                        setThumbnail(response.data.thumbsFilePath)
-                    } else {
-                        alert('Failed to make the thumbnails');
-                    }
-                })
                 
             } else {
                 alert('failed to save the video in server')
@@ -150,25 +139,20 @@ const AddProduct = () => {
                         </div>
                     )}
                 </Dropzone>
-
-                 {Thumbnail !== "" &&
-                    <div>
-                        <img src={`http://localhost:8000/${Thumbnail}`} alt="haha" />
-                    </div>
-                } 
             </div>
-      {/* <div className="form-group">
+      <br></br>
+      <span>thumbnail photo</span>
+      <div className="form-group">
         <label className="btn btn-block btn-success">
           <input
-            //onChange={handleChange("photo")}
-            onChange={onDrop("photo")}
+            onChange={handleChange("photo")}
             type="file"
             name="photo"
             accept="image"
             placeholder="choose a file"
           />
         </label>
-      </div>  */}
+      </div> 
       <div className="form-group">
         <input
           onChange={handleChange("name")}
