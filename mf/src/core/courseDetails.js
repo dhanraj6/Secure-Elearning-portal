@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { getProduct } from "../admin/helper/adminapicall";
 import ImageHelper from "../core/helper/ImageHelper"
+import ImageHelperById  from "./helper/ImageHelper"
 import './style.css'
 
 const CourseDetails = ({ match }) => {
@@ -26,6 +27,7 @@ const CourseDetails = ({ match }) => {
         formData,
     } = values;
 
+    const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -80,7 +82,7 @@ const CourseDetails = ({ match }) => {
         preload(match.params.productId);
     }, []);
 
-
+    
     return (
         <Base title="" description="" fontColor="Yellow"
             className="bg-dark text-black p-4"
@@ -88,9 +90,7 @@ const CourseDetails = ({ match }) => {
             <div className="text-center layoutChanger">
                 <div className="col">
                     <h1>{name}</h1>
-                    <div className="imageCard">
-                        <ImageHelper className="imageStyle" product={match.productId} />
-                    </div>
+                    <img src={imageurl} alt="photo" style={{ maxHeight: "100%", maxWidth: "50%" }} className="mb-3 rounded" />
                     <div className="containerStyle">
                         {`${description.substring(0, 2000)}...`}
                     </div>
