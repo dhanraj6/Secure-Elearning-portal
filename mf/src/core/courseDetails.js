@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { getProduct } from "../admin/helper/adminapicall";
 import ImageHelper from "../core/helper/ImageHelper"
-import ImageHelperById  from "./helper/ImageHelper"
+import ImageHelperById from "./helper/ImageHelper"
 import './style.css'
 
 const CourseDetails = ({ match }) => {
@@ -48,6 +48,49 @@ const CourseDetails = ({ match }) => {
         });
     };
 
+    const features = () => {
+        return (
+            <div className="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Shareable Certificate</h5>
+                                <p class="card-text">Earn a Certificate upon completion.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> 100% online</h5>
+                                <p class="card-text">Start instantly and learn at your own schedule.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">ESubtitles: Hindi ,Arabic, French, Ukrainian,  </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"> 100% genuine Certificate</h5>
+                                <p class="card-text">Project completion you will get hashed certificate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        )
+    }
 
     const contentList = () => {
         return (
@@ -65,7 +108,7 @@ const CourseDetails = ({ match }) => {
       Cras justo odio
     </div>
                     <span class="badge bg-info p-3 rounded-pill">14</span>
-                   
+
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start rounded">
                     <div class="ms-2 me-auto">
@@ -82,7 +125,7 @@ const CourseDetails = ({ match }) => {
         preload(match.params.productId);
     }, []);
 
-    
+
     return (
         <Base title="" description="" fontColor="Yellow"
             className="bg-dark text-black p-4"
@@ -96,6 +139,7 @@ const CourseDetails = ({ match }) => {
                     </div>
                 </div>
                 <div className="container ">
+                    {features()}
                     {contentList()}
                 </div>
             </div>
