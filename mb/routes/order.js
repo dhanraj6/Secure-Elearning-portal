@@ -11,7 +11,6 @@ const {getOrderId, createOrder,getAllOrders, updateStatus, getOrderStatus} = req
 router.param("userId",getUserById)
 router.param("orderId",getOrderId)
 
-
 //actual routes
 
 //create

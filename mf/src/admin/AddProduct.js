@@ -141,7 +141,7 @@ const AddProduct = () => {
                 </Dropzone>
             </div>
       <br></br>
-      <span>thumbnail photo</span>
+      <span>Thumbnail photo</span>
       <div className="form-group">
         <label className="btn btn-block btn-success">
           <input
