@@ -30,9 +30,9 @@ exports.createProduct = (req, res) => {
         }
         console.log(fields)
         //destructure the fiekds 
-        const {name, description, price, category, stock,creator} = fields
+        const {name, description, price, category, stock,creator, filePath} = fields
 
-        if(!name || !description || !price || !category || !stock || !creator){
+        if(!name || !description || !price || !category || !stock || !creator || !filePath){
             return res.status(400).json({
                 error: "Please include all fields"
             });
@@ -51,7 +51,8 @@ exports.createProduct = (req, res) => {
             product.photo.contentType = file.photo.type
         }
 
-        //console.log(product);
+        console.log("i need this")
+        console.log(product);
 
         //save to db
         product.save((err, product) => {

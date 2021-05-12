@@ -62,6 +62,8 @@ const AddProduct = () => {
 
   const onSubmit = event => {
     event.preventDefault();
+    console.log(FilePath)
+    formData.set("filePath", FilePath)
     setValues({ ...values, error: "", loading: true });
     createaProduct(user._id, token, formData).then(data => {
       if (data.error) {

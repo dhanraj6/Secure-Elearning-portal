@@ -14,9 +14,9 @@ const productSchema = new Schema({
         ref:"User",
         required: true
     },
-    // filePath:{
-    //     type:String
-    // },
+    filePath:{
+         type:String
+     },
     // duration:
     // {
     //     type:String
