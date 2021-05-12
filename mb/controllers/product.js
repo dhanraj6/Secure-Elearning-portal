@@ -28,10 +28,11 @@ exports.createProduct = (req, res) => {
                 error: "problem with image"
             });
         }
+        console.log(fields)
         //destructure the fiekds 
-        const {name, description, price, category, stock} = fields
+        const {name, description, price, category, stock,creator} = fields
 
-        if(!name || !description || !price || !category || !stock){
+        if(!name || !description || !price || !category || !stock || !creator){
             return res.status(400).json({
                 error: "Please include all fields"
             });

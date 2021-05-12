@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {ObjectId} = mongoose.Schema
+const { ObjectId } = mongoose.Schema
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
@@ -9,6 +9,18 @@ const productSchema = new Schema({
         required: true,
         maxlength: 32
     },
+    creator: {
+        type: ObjectId,
+        ref:"User",
+        required: true
+    },
+    // filePath:{
+    //     type:String
+    // },
+    // duration:
+    // {
+    //     type:String
+    // },
     description: {
         type: String,
         trim: true,
@@ -37,7 +49,7 @@ const productSchema = new Schema({
         contentType: String
     }
 },
-{timestamps: true}
+    { timestamps: true }
 );
 
 module.exports = mongoose.model("Product", productSchema);

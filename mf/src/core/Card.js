@@ -39,7 +39,7 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
       courseInfo && (
         <button
           onClick={gotoInfo}
-          className="btn btn-block btn-outline-success mt-2 mb-2"
+          className="btn btn-block btn-outline-info mt-2 mb-2"
         >
           Know More
         </button>
