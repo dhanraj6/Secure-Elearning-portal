@@ -7,7 +7,6 @@ import ImageHelperById from "./helper/ImageHelper"
 import './style.css'
 import axios from 'axios';
 import { API } from "../backend";
-import ReactPlayer from 'react-player'
 import abc from "../assets/abc.mp4"
 
 
@@ -183,11 +182,12 @@ const CourseDetails = ({ match }) => {
                 <div className="container ">
                     <div>
                         {redirectCourse(courseRedirect)}
-                        {features()}
+                        {startCourse()}
                     </div>
                     {features()}
                     {contentList()}
                 </div>
+                
                 <video style={{ width: '100%' }} controls autoPlay>
                     <source src={abc} type="video/mp4" />
                 </video>
