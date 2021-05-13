@@ -5,6 +5,7 @@ import Base from "./Base";
 import Card from "./Card";
 import { getProduct } from "../admin/helper/adminapicall";
 import "./style.css"
+import abc from  "../assets/uploads/Python.mp4"
 
 export default function CourseMain({match}) {
 
@@ -55,19 +56,25 @@ export default function CourseMain({match}) {
         preload(match.params.productId);
     }, []);
 
+   
+    ///addcode to get user by id according to loggedin user 
+    ///and check his purchases list
+    //iterate the purchase list and check whether present list contains any id === videoid
 
   return (
     <Base title="" description="">
       <div className="text-center">
         <h3>Main course Page</h3>
         <hr></hr>
-        <h4>You are subcribed to course:<br></br> {name}</h4>
+        <h4>Enrolled course : {name}</h4>
         <hr></hr>
-        <h4>Your Video goes in here</h4>
+        <h4>Course Description : {description}</h4>
         <hr></hr>
-        <h4>Course Description:<br></br>{description}</h4>
+        <h4>Video</h4>
+        <video style={{ width: '100%' }} controls >
+            <source src={abc} type="video/mp4" />
+        </video>
         <hr></hr>
-        <h4>Course Notes here</h4>
       </div>
     </Base>
   );

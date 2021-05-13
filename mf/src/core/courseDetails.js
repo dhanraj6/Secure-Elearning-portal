@@ -7,7 +7,7 @@ import ImageHelperById from "./helper/ImageHelper"
 import './style.css'
 import axios from 'axios';
 import { API } from "../backend";
-import abc from "../assets/abc.mp4"
+
 
 
 const CourseDetails = ({ match }) => {
@@ -19,6 +19,7 @@ const CourseDetails = ({ match }) => {
         stock: "",
         photo: "",
         filePath: "",
+        creator:"",
     })
 
     const {
@@ -31,6 +32,7 @@ const CourseDetails = ({ match }) => {
         category,
         loading,
         formData,
+        creator,
     } = values;
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
@@ -50,6 +52,7 @@ const CourseDetails = ({ match }) => {
                     category: data.category._id,
                     stock: data.stock,
                     filePath: data.filePath,
+                    creator: data.creator,
                     formData: new FormData(),
                 });
             }
