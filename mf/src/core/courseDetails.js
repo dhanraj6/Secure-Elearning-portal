@@ -149,7 +149,7 @@ const CourseDetails = ({ match }) => {
 
     const redirectCourse = courseRedirect => {
         if (courseRedirect) {
-            return <Redirect to={`/video/${match.params.productId}`} />
+            return <Redirect to={`/course/video/${match.params.productId}`} />
         }
     }
 
