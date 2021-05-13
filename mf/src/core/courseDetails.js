@@ -187,10 +187,9 @@ const CourseDetails = ({ match }) => {
                     {features()}
                     {contentList()}
                 </div>
-                
-                <video style={{ width: '100%' }} controls autoPlay>
+                {/* <video style={{ width: '100%' }} controls autoPlay>
                     <source src={abc} type="video/mp4" />
-                </video>
+                </video> */}
             </div>
         </Base>
     )
