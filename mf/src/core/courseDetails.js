@@ -7,8 +7,6 @@ import './style.css'
 import axios from 'axios';
 import { API } from "../backend";
 import ReactPlayer from 'react-player'
-/* const ter = "../assets" + "regx"
-import xyz from "..\mf\src\assets\1620910513794_sv.mp4"; */
 import abc from "../assets/abc.mp4" 
 
 
@@ -37,7 +35,7 @@ const CourseDetails = ({ match }) => {
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
 
-    /* const videoUrl = `../assets/uploads/${abc.mp4}` */
+    
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -172,3 +170,5 @@ const CourseDetails = ({ match }) => {
 
 
 export default CourseDetails;
+
+
