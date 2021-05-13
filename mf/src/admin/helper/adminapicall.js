@@ -128,7 +128,7 @@ export const getProduct = productId => {
     .then(response => {
       return response.json();
     })
-    .catch( console.log("getProduct not working"));
+    
     
 };
 

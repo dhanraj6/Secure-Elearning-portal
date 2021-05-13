@@ -28,7 +28,7 @@ exports.createProduct = (req, res) => {
                 error: "problem with image"
             });
         }
-        console.log(fields)
+        //console.log(fields)
         //destructure the fiekds 
         const {name, description, price, category, stock,creator, filePath} = fields
 
@@ -51,8 +51,8 @@ exports.createProduct = (req, res) => {
             product.photo.contentType = file.photo.type
         }
 
-        console.log("i need this")
-        console.log(product);
+        //console.log("i need this")
+        //console.log(product);
 
         //save to db
         product.save((err, product) => {

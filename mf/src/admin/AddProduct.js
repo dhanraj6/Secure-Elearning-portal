@@ -6,7 +6,6 @@ import { isAutheticated } from "../auth/helper/index";
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
-
 const AddProduct = () => {
   const { user, token } = isAutheticated();
 
@@ -59,6 +58,8 @@ const AddProduct = () => {
   useEffect(() => {
     preload();
   }, []);
+ 
+
 
   const onSubmit = event => {
     event.preventDefault();
@@ -92,7 +93,7 @@ const AddProduct = () => {
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
-
+   
   const onDrop = (files) => {
     let formData = new FormData();
     const config = {

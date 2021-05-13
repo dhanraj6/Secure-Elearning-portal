@@ -4,6 +4,13 @@ import { getProduct } from "../admin/helper/adminapicall";
 import ImageHelper from "../core/helper/ImageHelper"
 import ImageHelperById from "./helper/ImageHelper"
 import './style.css'
+import axios from 'axios';
+import { API } from "../backend";
+import ReactPlayer from 'react-player'
+/* const ter = "../assets" + "regx"
+import xyz from "..\mf\src\assets\1620910513794_sv.mp4"; */
+import abc from "../assets/abc.mp4" 
+
 
 const CourseDetails = ({ match }) => {
 
@@ -13,7 +20,7 @@ const CourseDetails = ({ match }) => {
         price: "",
         stock: "",
         photo: "",
-
+        filePath:"",
     })
 
     const {
@@ -22,12 +29,15 @@ const CourseDetails = ({ match }) => {
         price,
         stock,
         categories,
+        filePath,
         category,
         loading,
         formData,
     } = values;
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
+
+    /* const videoUrl = `../assets/uploads/${abc.mp4}` */
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -42,6 +52,7 @@ const CourseDetails = ({ match }) => {
                     price: data.price,
                     category: data.category._id,
                     stock: data.stock,
+                    filePath:data.filePath,
                     formData: new FormData(),
                 });
             }
@@ -92,6 +103,13 @@ const CourseDetails = ({ match }) => {
         )
     }
 
+   /*  const regx = filePath.slice(17)
+    console.log(regx)
+
+    const abc = "../assets/" + regx
+    console.log(abc)
+ */
+
     const contentList = () => {
         return (
             <ol class="list-group list-group-numbered">
@@ -125,6 +143,7 @@ const CourseDetails = ({ match }) => {
         preload(match.params.productId);
     }, []);
 
+    //console.log(filePath)
 
     return (
         <Base title="" description="" fontColor="Yellow"
@@ -138,10 +157,14 @@ const CourseDetails = ({ match }) => {
                         {`${description.substring(0, 2000)}...`}
                     </div>
                 </div>
+                 
                 <div className="container ">
                     {features()}
                     {contentList()}
                 </div>
+                <video style={{ width: '100%' }} controls autoPlay>
+                    <source src={abc} type="video/mp4"/>
+                </video>
             </div>
         </Base>
     )

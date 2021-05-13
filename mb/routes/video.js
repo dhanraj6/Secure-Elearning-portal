@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const Product = require("../models/product");
 
 
 var storage = multer.diskStorage({
     destination:  (req, file, cb) => {
-        cb(null, 'uploads/')
+        cb(null, '../mf/src/assets/uploads')
     },
     filename:  (req, file, cb) => {
         cb(null, `${Date.now()}_${file.originalname}`)
@@ -45,6 +46,15 @@ router.get("/video/uploadfiles", (req, res) => {
 
 }); 
 
+router.post("/video/getVideo", (req, res) => {
+     
+    Product.findOne({ "_id" : req.body.videoId })
+    .populate('writer')
+    .exec((err, video) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success: true, video })
+    })
+});
 
 
 module.exports = router;
