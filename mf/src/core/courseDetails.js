@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
+import { Redirect } from "react-router-dom";
 import { getProduct } from "../admin/helper/adminapicall";
 import ImageHelper from "../core/helper/ImageHelper"
 import ImageHelperById from "./helper/ImageHelper"
@@ -7,7 +8,7 @@ import './style.css'
 import axios from 'axios';
 import { API } from "../backend";
 import ReactPlayer from 'react-player'
-import abc from "../assets/abc.mp4" 
+import abc from "../assets/abc.mp4"
 
 
 const CourseDetails = ({ match }) => {
@@ -18,7 +19,7 @@ const CourseDetails = ({ match }) => {
         price: "",
         stock: "",
         photo: "",
-        filePath:"",
+        filePath: "",
     })
 
     const {
@@ -34,8 +35,7 @@ const CourseDetails = ({ match }) => {
     } = values;
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
-
-    
+    const [courseRedirect, setCourseRedirect] = useState(false);
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -50,7 +50,7 @@ const CourseDetails = ({ match }) => {
                     price: data.price,
                     category: data.category._id,
                     stock: data.stock,
-                    filePath:data.filePath,
+                    filePath: data.filePath,
                     formData: new FormData(),
                 });
             }
@@ -101,12 +101,12 @@ const CourseDetails = ({ match }) => {
         )
     }
 
-   /*  const regx = filePath.slice(17)
-    console.log(regx)
-
-    const abc = "../assets/" + regx
-    console.log(abc)
- */
+    /*  const regx = filePath.slice(17)
+     console.log(regx)
+ 
+     const abc = "../assets/" + regx
+     console.log(abc)
+  */
 
     const contentList = () => {
         return (
@@ -143,6 +143,30 @@ const CourseDetails = ({ match }) => {
 
     //console.log(filePath)
 
+    const gotoCourse = () => {
+        setCourseRedirect(true);
+    }
+
+
+    const redirectCourse = courseRedirect => {
+        if (courseRedirect) {
+            return <Redirect to={`/video/${match.params.productId}`} />
+        }
+    }
+
+    const startCourse = () => {
+        return (
+            (
+                <button
+                    onClick={gotoCourse}
+                    className="btn btn-block btn-outline-info mt-2 mb-2"
+                >
+                    StartCourse
+                </button>
+            )
+        );
+    };
+
     return (
         <Base title="" description="" fontColor="Yellow"
             className="bg-dark text-black p-4"
@@ -155,13 +179,17 @@ const CourseDetails = ({ match }) => {
                         {`${description.substring(0, 2000)}...`}
                     </div>
                 </div>
-                 
+
                 <div className="container ">
+                    <div>
+                        {redirectCourse(courseRedirect)}
+                        {features()}
+                    </div>
                     {features()}
                     {contentList()}
                 </div>
                 <video style={{ width: '100%' }} controls autoPlay>
-                    <source src={abc} type="video/mp4"/>
+                    <source src={abc} type="video/mp4" />
                 </video>
             </div>
         </Base>
