@@ -6,8 +6,11 @@ import Card from "./Card";
 import { getProduct } from "../admin/helper/adminapicall";
 import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
+import { isAutheticated } from "../auth/helper/index";
 
 export default function CourseMain({match}) {
+
+    const userId = isAutheticated() && isAutheticated().user._id;
 
     const [values, setValues] = useState({
         name: "",
@@ -56,8 +59,21 @@ export default function CourseMain({match}) {
         preload(match.params.productId);
     }, []);
 
+    const getUserPurchaseList = productId => {
+
+        //here getuserbyid admin api call goes 
+
+       /* deleteProduct(productId, user._id, token).then(data => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            preload();
+          }
+        }); */ 
+      };
    
-    ///addcode to get user by id according to loggedin user 
+    ///add the code to get user by id(there is function already written) according to loggedin user (done)
+    //first create getuserbyid function in admin api call so that i can called in getUserPurchaseList
     ///and check his purchases list
     //iterate the purchase list and check whether present list contains any id === videoid
 
