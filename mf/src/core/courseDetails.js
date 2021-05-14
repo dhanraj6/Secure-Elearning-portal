@@ -20,7 +20,7 @@ const CourseDetails = ({ match }) => {
         stock: "",
         photo: "",
         filePath: "",
-        creator:"",
+        creator: "",
     })
 
     const {
@@ -39,11 +39,12 @@ const CourseDetails = ({ match }) => {
     const userId = isAutheticated() && isAutheticated().user._id;
     const token = isAutheticated() && isAutheticated().token;
     const [course, setCourses] = useState();
+    const [productIdArray,setproductArray] = useState([]);
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
     const [courseRedirect, setCourseRedirect] = useState(false);
 
-    var plist=[]
+    var plist = []
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -65,20 +66,21 @@ const CourseDetails = ({ match }) => {
             }
         });
 
-        
+        let prod =[];
         getPurchaseList(userId, token).then(data => {
             if (data.error) {
-              console.log(data.error);
-            } 
-            else {
-                for(let i = 0; i < data.length; i++){   
-                    plist.push(data[i].products[0]._id);
-                } 
-                console.log(plist)
-                setCourses(data[0].products[0]._id);
+                console.log(data.error);
             }
-          }); 
+            else {
+                for(let i=0;i<data.length;i++)
+                {
+                    prod.push(data[i].products[0]._id);
+                }
+                setproductArray(prod);
+            }
+        });
     };
+
 
     const features = () => {
         return (
@@ -170,13 +172,15 @@ const CourseDetails = ({ match }) => {
         }
     }
 
-    const checkSubscribed = (match.params.productId === course)?true:false;
-    
+    // const checkSubscribed = (match.params.productId === course) ? true : false;
+
     /* var ii = String(match.params.productId)
     console.log(ii)
     const checkSubscribed = plist.includes((match.params.productId).toString());
     console.log(checkSubscribed); */
 
+    const checkSubscribed = productIdArray.includes(match.params.productId);
+    
     const startCourse = () => {
         return checkSubscribed && (
             (
@@ -192,9 +196,9 @@ const CourseDetails = ({ match }) => {
 
 
     // const getUserPurchaseList = (userId, token) => {
-      
+
     //   };
- 
+
     ///and check his purchases list
     //iterate the purchase list  contains data.products._id === match.params.productId
 
@@ -215,7 +219,7 @@ const CourseDetails = ({ match }) => {
                     <div>
                         {redirectCourse(courseRedirect)}
                         {startCourse()}
-                    </div>        
+                    </div>
                     {features()}
                     {contentList()}
                 </div>
