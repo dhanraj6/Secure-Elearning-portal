@@ -105,9 +105,13 @@ export const getProducts = () => {
 
 //getpurchaselist
 
-export const getPurchaseList= (userId) => {
+export const getPurchaseList= (userId, token) => {
   return fetch(`${API}/orders/user/${userId}`, {
-    method: "GET"
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    }
   })
     .then(response => {
       return response.json();

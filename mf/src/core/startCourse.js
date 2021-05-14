@@ -11,6 +11,7 @@ import { isAutheticated } from "../auth/helper/index";
 export default function CourseMain({match}) {
 
     const userId = isAutheticated() && isAutheticated().user._id;
+    const token = isAutheticated() && isAutheticated().token;
 
     const [values, setValues] = useState({
         name: "",
@@ -59,8 +60,8 @@ export default function CourseMain({match}) {
         preload(match.params.productId);
     }, []);
 
-    const getUserPurchaseList = userId => {
-        getPurchaseList(userId).then(data => {
+    const getUserPurchaseList = (userId, token) => {
+        getPurchaseList(userId, token).then(data => {
           if (data.error) {
             console.log(data.error);
           } else {
@@ -70,7 +71,7 @@ export default function CourseMain({match}) {
         }); 
       };
 
-      {getUserPurchaseList(userId)}
+      console.log(getUserPurchaseList(userId))
    
     ///add the code to get user by id(there is function already written) according to loggedin user (done)
     //first create getuserbyid function in admin api call so that i can called in getUserPurchaseList
