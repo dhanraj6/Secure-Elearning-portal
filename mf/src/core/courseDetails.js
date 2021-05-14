@@ -38,7 +38,7 @@ const CourseDetails = ({ match }) => {
 
     const userId = isAutheticated() && isAutheticated().user._id;
     const token = isAutheticated() && isAutheticated().token;
-    const [courses, setCourses] = useState([]);
+    const [course, setCourses] = useState();
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
     const [courseRedirect, setCourseRedirect] = useState(false);
@@ -66,8 +66,8 @@ const CourseDetails = ({ match }) => {
             if (data.error) {
               console.log(data.error);
             } else {
-                console.log(data[0].products)
-                setCourses(data);
+                // console.log(data[0].products[0]._id)
+                setCourses(data[0].products[0]._id);
             }
           }); 
     };
@@ -75,38 +75,38 @@ const CourseDetails = ({ match }) => {
     const features = () => {
         return (
             <div className="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Shareable Certificate</h5>
-                                <p class="card-text">Earn a Certificate upon completion.</p>
+                <div className="row">
+                    <div className="col-sm-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Shareable Certificate</h5>
+                                <p className="card-text">Earn a Certificate upon completion.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"> 100% online</h5>
-                                <p class="card-text">Start instantly and learn at your own schedule.</p>
+                    <div className="col-sm-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title"> 100% online</h5>
+                                <p className="card-text">Start instantly and learn at your own schedule.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">English</h5>
-                                <p class="card-text">ESubtitles: Hindi ,Arabic, French, Ukrainian,  </p>
+                <div className="row">
+                    <div className="col-sm-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">English</h5>
+                                <p className="card-text">ESubtitles: Hindi ,Arabic, French, Ukrainian,  </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title"> 100% genuine Certificate</h5>
-                                <p class="card-text">Project completion you will get hashed certificate.</p>
+                    <div className="col-sm-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title"> 100% genuine Certificate</h5>
+                                <p className="card-text">Project completion you will get hashed certificate.</p>
                             </div>
                         </div>
                     </div>
@@ -118,28 +118,28 @@ const CourseDetails = ({ match }) => {
 
     const contentList = () => {
         return (
-            <ol class="list-group list-group-numbered">
-                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
+            <ol className="list-group list-group-numbered">
+                <li className="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div className="ms-2 me-auto">
+                        <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span class="badge bg-info p-3 rounded-pill">14 </span>
+                    <span className="badge bg-info p-3 rounded-pill">14 </span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
+                <li className="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div className="ms-2 me-auto">
+                        <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span class="badge bg-info p-3 rounded-pill">14</span>
+                    <span className="badge bg-info p-3 rounded-pill">14</span>
 
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start rounded">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
+                <li className="list-group-item d-flex justify-content-between align-items-start rounded">
+                    <div className="ms-2 me-auto">
+                        <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span class="badge bg-info p-3 rounded-pill">14</span>
+                    <span className="badge bg-info p-3 rounded-pill">14</span>
                 </li>
             </ol>
         )
@@ -162,8 +162,11 @@ const CourseDetails = ({ match }) => {
         }
     }
 
+    const checkSubscribed = (match.params.productId === course)?true:false;
+    // console.log(checkSubscribed);
+
     const startCourse = () => {
-        return (
+        return checkSubscribed && (
             (
                 <button
                     onClick={gotoCourse}
@@ -206,13 +209,6 @@ const CourseDetails = ({ match }) => {
                 </div>
             </div>
             <hr></hr>
-            { courses.map((course, index) => {
-                return (
-                    <div key={index} className="col-4 mb-4">
-                        <h3>{course._id}</h3> 
-                    </div>
-                );
-            })} 
         </Base>
     )
 }
