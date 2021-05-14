@@ -43,7 +43,7 @@ exports.updateUser = (req,res) => {
 };
 
 exports.userPurchaseList = (req, res) => {
-    Order.find({ user: req.profile._id })
+  Order.Order.find({ user: req.profile._id })
       .populate("user", "_id name")
       .exec((err, order) => {
         if (err) {

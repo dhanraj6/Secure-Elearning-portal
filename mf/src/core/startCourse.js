@@ -66,7 +66,8 @@ export default function CourseMain({match}) {
             console.log(data.error);
           } else {
             console.log("yeeeeeeeeeeeee")
-            preload();
+            //fetch orders here write some code
+            //preload();
             //something
           }
         }); 
