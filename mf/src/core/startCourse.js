@@ -3,7 +3,7 @@ import "../styles.css";
 import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
-import { getProduct } from "../admin/helper/adminapicall";
+import { getProduct, getPurchaseList } from "../admin/helper/adminapicall";
 import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
 import { isAutheticated } from "../auth/helper/index";
@@ -59,18 +59,18 @@ export default function CourseMain({match}) {
         preload(match.params.productId);
     }, []);
 
-    const getUserPurchaseList = productId => {
-
-        //here getuserbyid admin api call goes 
-
-       /* deleteProduct(productId, user._id, token).then(data => {
+    const getUserPurchaseList = userId => {
+        getPurchaseList(userId).then(data => {
           if (data.error) {
             console.log(data.error);
           } else {
             preload();
+            //something
           }
-        }); */ 
+        }); 
       };
+
+      {getUserPurchaseList(userId)}
    
     ///add the code to get user by id(there is function already written) according to loggedin user (done)
     //first create getuserbyid function in admin api call so that i can called in getUserPurchaseList
