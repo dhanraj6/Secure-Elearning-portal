@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Redirect } from "react-router-dom";
-import { getProduct } from "../admin/helper/adminapicall";
+import { getProduct, getPurchaseList } from "../admin/helper/adminapicall";
 import ImageHelper from "../core/helper/ImageHelper"
 import ImageHelperById from "./helper/ImageHelper"
 import './style.css'
 import axios from 'axios';
 import { API } from "../backend";
+import { isAutheticated } from "../auth/helper/index";
 
 
 
@@ -34,6 +35,10 @@ const CourseDetails = ({ match }) => {
         formData,
         creator,
     } = values;
+
+    const userId = isAutheticated() && isAutheticated().user._id;
+    const token = isAutheticated() && isAutheticated().token;
+    const [courses, setCourses] = useState([]);
 
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
     const [courseRedirect, setCourseRedirect] = useState(false);
@@ -103,13 +108,6 @@ const CourseDetails = ({ match }) => {
         )
     }
 
-    /*  const regx = filePath.slice(17)
-     console.log(regx)
- 
-     const abc = "../assets/" + regx
-     console.log(abc)
-  */
-
     const contentList = () => {
         return (
             <ol class="list-group list-group-numbered">
@@ -169,6 +167,26 @@ const CourseDetails = ({ match }) => {
         );
     };
 
+
+    const getUserPurchaseList = (userId, token) => {
+        getPurchaseList(userId, token).then(data => {
+          if (data.error) {
+            console.log(data.error);
+          } else {
+            console.log("yeeeeeeeeeeeee")
+            //console.log(data)
+            setCourses(data)
+          
+            //fetch orders here write some code
+        
+          }
+        }); 
+      };
+ 
+    ///and check his purchases list
+    //iterate the purchase list  contains data.products._id === match.params.productId
+
+
     return (
         <Base title="" description="" fontColor="Yellow"
             className="bg-dark text-black p-4"
@@ -181,7 +199,6 @@ const CourseDetails = ({ match }) => {
                         {`${description.substring(0, 2000)}...`}
                     </div>
                 </div>
-
                 <div className="container ">
                     <div>
                         {redirectCourse(courseRedirect)}
@@ -190,10 +207,16 @@ const CourseDetails = ({ match }) => {
                     {features()}
                     {contentList()}
                 </div>
-                {/* <video style={{ width: '100%' }} controls autoPlay>
-                    <source src={abc} type="video/mp4" />
-                </video> */}
             </div>
+            {getUserPurchaseList(userId, token)}
+            <hr></hr>
+            {courses.map((course, index) => {
+                return (
+                    <div key={index} className="col-4 mb-4">
+                        <h3>{course._id}</h3> 
+                    </div>
+                );
+            })}
         </Base>
     )
 }
