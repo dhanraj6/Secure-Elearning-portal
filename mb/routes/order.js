@@ -20,8 +20,8 @@ router.post("/order/create/:userId", isSignedin, isAuthenticated, pushOrderInPur
 router.get("/order/all/:userId", isSignedin, isAuthenticated, isAdmin, getAllOrders);
 
 //order status 
-//router.get("/order/status/:userId", isSignedin, isAuthenticated, isAdmin, getOrderStatus)
-router.get("/order/status/:userId", isSignedin, isAuthenticated, getOrderStatus)
+router.get("/order/status/:userId", isSignedin, isAuthenticated, isAdmin, getOrderStatus)
+//router.get("/order/status/:userId", isSignedin, isAuthenticated, getOrderStatus)
 
 
 // order status update by user

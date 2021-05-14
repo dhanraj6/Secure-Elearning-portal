@@ -65,13 +65,14 @@ export default function CourseMain({match}) {
           if (data.error) {
             console.log(data.error);
           } else {
+            console.log("yeeeeeeeeeeeee")
             preload();
             //something
           }
         }); 
       };
 
-      console.log(getUserPurchaseList(userId))
+      //console.log()
    
     ///add the code to get user by id(there is function already written) according to loggedin user (done)
     //first create getuserbyid function in admin api call so that i can called in getUserPurchaseList
@@ -88,6 +89,7 @@ export default function CourseMain({match}) {
         <h4>Course Description : {description}</h4>
         <hr></hr>
         <h4>Video</h4>
+        {getUserPurchaseList(userId, token)}
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
         </video>
