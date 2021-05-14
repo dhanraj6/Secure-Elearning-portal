@@ -4,6 +4,7 @@ import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
 import { getProducts } from "../core/helper/coreapicalls";
+import "./style.css"
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -25,10 +26,10 @@ export default function Home() {
 
   return (
     <Base title="" description="">
-      <div className="row text-center">
+      <div className="text-center">
         <h1 className="bg-dark text-white text-center">All Courses</h1>
-        
-        <div className="row">
+
+        <div className=" layoutChanger">
           {products.map((product, index) => {
             return (
               <div key={index} className="col-4 mb-4">
