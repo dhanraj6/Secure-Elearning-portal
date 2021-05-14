@@ -43,6 +43,8 @@ const CourseDetails = ({ match }) => {
     const imageurl = `http://localhost:8000/api//product/photo/${match.params.productId}`
     const [courseRedirect, setCourseRedirect] = useState(false);
 
+    var plist=[]
+
     const preload = (productId) => {
         getProduct(productId).then((data) => {
             if (data.error) {
@@ -62,11 +64,17 @@ const CourseDetails = ({ match }) => {
                 });
             }
         });
+
+        
         getPurchaseList(userId, token).then(data => {
             if (data.error) {
               console.log(data.error);
-            } else {
-                // console.log(data[0].products[0]._id)
+            } 
+            else {
+                for(let i = 0; i < data.length; i++){   
+                    plist.push(data[i].products[0]._id);
+                } 
+                console.log(plist)
                 setCourses(data[0].products[0]._id);
             }
           }); 
@@ -163,7 +171,11 @@ const CourseDetails = ({ match }) => {
     }
 
     const checkSubscribed = (match.params.productId === course)?true:false;
-    // console.log(checkSubscribed);
+    
+    /* var ii = String(match.params.productId)
+    console.log(ii)
+    const checkSubscribed = plist.includes((match.params.productId).toString());
+    console.log(checkSubscribed); */
 
     const startCourse = () => {
         return checkSubscribed && (
