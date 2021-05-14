@@ -12,6 +12,7 @@ export default function CourseMain({match}) {
 
     const userId = isAutheticated() && isAutheticated().user._id;
     const token = isAutheticated() && isAutheticated().token;
+    const [courses, setCourses] = useState([]);
 
     const [values, setValues] = useState({
         name: "",
@@ -66,14 +67,15 @@ export default function CourseMain({match}) {
             console.log(data.error);
           } else {
             console.log("yeeeeeeeeeeeee")
+            //console.log(data)
+            setCourses(data)
+          
             //fetch orders here write some code
-            //preload();
-            //something
           }
         }); 
       };
 
-      //console.log()
+      
    
     ///add the code to get user by id(there is function already written) according to loggedin user (done)
     //first create getuserbyid function in admin api call so that i can called in getUserPurchaseList
@@ -95,6 +97,13 @@ export default function CourseMain({match}) {
             <source src={abc} type="video/mp4" />
         </video>
         <hr></hr>
+        {courses.map((course, index) => {
+            return (
+              <div key={index} className="col-4 mb-4">
+               <h3>{course._id}</h3> 
+              </div>
+            );
+          })}
       </div>
     </Base>
   );
