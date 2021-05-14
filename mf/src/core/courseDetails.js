@@ -62,6 +62,14 @@ const CourseDetails = ({ match }) => {
                 });
             }
         });
+        getPurchaseList(userId, token).then(data => {
+            if (data.error) {
+              console.log(data.error);
+            } else {
+                console.log(data[0].products)
+                setCourses(data);
+            }
+          }); 
     };
 
     const features = () => {
@@ -168,20 +176,9 @@ const CourseDetails = ({ match }) => {
     };
 
 
-    const getUserPurchaseList = (userId, token) => {
-        getPurchaseList(userId, token).then(data => {
-          if (data.error) {
-            console.log(data.error);
-          } else {
-            console.log("yeeeeeeeeeeeee")
-            //console.log(data)
-            setCourses(data)
-          
-            //fetch orders here write some code
-        
-          }
-        }); 
-      };
+    // const getUserPurchaseList = (userId, token) => {
+      
+    //   };
  
     ///and check his purchases list
     //iterate the purchase list  contains data.products._id === match.params.productId
@@ -203,20 +200,19 @@ const CourseDetails = ({ match }) => {
                     <div>
                         {redirectCourse(courseRedirect)}
                         {startCourse()}
-                    </div>
+                    </div>        
                     {features()}
                     {contentList()}
                 </div>
             </div>
-            {getUserPurchaseList(userId, token)}
             <hr></hr>
-            {courses.map((course, index) => {
+            { courses.map((course, index) => {
                 return (
                     <div key={index} className="col-4 mb-4">
                         <h3>{course._id}</h3> 
                     </div>
                 );
-            })}
+            })} 
         </Base>
     )
 }
