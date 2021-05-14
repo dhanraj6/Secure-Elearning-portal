@@ -103,6 +103,18 @@ export const getProducts = () => {
     
 };
 
+//getpurchaselist
+
+export const getPurchaseList= (userId) => {
+  return fetch(`${API}/orders/user/${userId}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    
+};
+
 //delete a product
 
 export const deleteProduct = (productId, userId, token) => {
