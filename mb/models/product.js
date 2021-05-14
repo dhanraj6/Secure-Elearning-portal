@@ -47,6 +47,10 @@ const productSchema = new Schema({
     photo: {
         data: Buffer,
         contentType: String
+    },
+    resource: {
+        data: Buffer,
+        contentType: String
     }
 },
     { timestamps: true }

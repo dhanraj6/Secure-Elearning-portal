@@ -53,6 +53,19 @@ exports.createProduct = (req, res) => {
 
         //console.log("i need this")
         //console.log(product);
+        
+        if(file.resource){
+            if(file.resource.size > 5000000){
+                return res.status(400).json({
+                    error: "file size too big"
+                });
+            }
+            product.resource.data = fs.readFileSync(file.resource.path)
+            product.resource.contentType = file.resource.type
+        }
+
+
+
 
         //save to db
         product.save((err, product) => {
