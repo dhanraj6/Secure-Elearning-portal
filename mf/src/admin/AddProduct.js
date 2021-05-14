@@ -14,6 +14,7 @@ const AddProduct = () => {
     creator: "",
     description: "",
     price: "",
+    resource: "",
     stock: "",
     photo: "",
     categories: [],
@@ -77,6 +78,7 @@ const AddProduct = () => {
           description: "",
           price: "",
           photo: "",
+          resource: "",
           stock: "",
           loading: false,
           createdProduct: data.name
@@ -89,9 +91,21 @@ const AddProduct = () => {
     if (name == "name") {
       formData.set("creator", user._id);
     }
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    if(name==="resource"){
+      const value1 = event.target.files[0]; 
+      formData.set(name, value1);
+      setValues({ ...values, [name]: value1 });
+    }
+    else if(name==="photo"){
+    const value = event.target.files[0];
     formData.set(name, value);
     setValues({ ...values, [name]: value });
+    }
+    else{
+      const value2 = event.target.value;
+      formData.set(name, value2);
+      setValues({ ...values, [name]: value2 });
+    }
   };
    
   const onDrop = (files) => {
@@ -171,6 +185,24 @@ const AddProduct = () => {
           />
         </label>
       </div>
+
+      <span>Course Resources</span>
+      <div className="form-group">
+        <label className="btn btn-block btn-success">
+          <input
+            onChange={handleChange("resource")}
+            type="file"
+            name="resource"
+            //accept="file"
+            placeholder="choose a file"
+          />
+        </label>
+      </div>
+
+
+
+
+
       <div className="form-group">
         <input
           onChange={handleChange("name")}
