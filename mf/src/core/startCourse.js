@@ -17,6 +17,7 @@ export default function CourseMain({match}) {
         stock: "",
         photo: "",
         filePath: "",
+        resource:"",
     })
 
     const {
@@ -29,6 +30,7 @@ export default function CourseMain({match}) {
         category,
         loading,
         formData,
+        resource,
     } = values;
 
 
@@ -46,6 +48,7 @@ export default function CourseMain({match}) {
                     category: data.category._id,
                     stock: data.stock,
                     filePath: data.filePath,
+                    resource: data.resource,
                     formData: new FormData(),
                 });
             }
@@ -66,6 +69,7 @@ export default function CourseMain({match}) {
         <hr></hr>
         <h4>Course Description : {description}</h4>
         <hr></hr>
+        <h4>resource : {resource}</h4>
         <h4>Video</h4>
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />

@@ -179,6 +179,8 @@ const CourseDetails = ({ match }) => {
     const checkSubscribed = plist.includes((match.params.productId).toString());
     console.log(checkSubscribed); */
 
+    console.log(productIdArray)
+
     const checkSubscribed = productIdArray.includes(match.params.productId);
     
     const startCourse = () => {
