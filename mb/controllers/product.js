@@ -55,7 +55,7 @@ exports.createProduct = (req, res) => {
         //console.log(product);
         
         if(file.resource){
-            if(file.resource.size > 5000000){
+            if(file.resource.size > 50000000){
                 return res.status(400).json({
                     error: "file size too big"
                 });

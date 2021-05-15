@@ -8,6 +8,8 @@ import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
 
 
+
+
 export default function CourseMain({match}) {
 
     const [values, setValues] = useState({
@@ -60,6 +62,8 @@ export default function CourseMain({match}) {
         preload(match.params.productId);
     }, []);
 
+  console.log(resource)
+
   return (
     <Base title="" description="">
       <div className="text-center">
@@ -69,7 +73,7 @@ export default function CourseMain({match}) {
         <hr></hr>
         <h4>Course Description : {description}</h4>
         <hr></hr>
-        <h4>resource : {resource}</h4>
+        {/* <h4>resource : {resource}</h4> */}
         <h4>Video</h4>
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
