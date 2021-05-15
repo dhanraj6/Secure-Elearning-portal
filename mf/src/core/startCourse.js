@@ -78,7 +78,6 @@ export default function CourseMain({match}) {
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
         </video>
-        <button onClick={onSubmitDownload()}></button>
         <hr></hr>    
       </div>
     </Base>
