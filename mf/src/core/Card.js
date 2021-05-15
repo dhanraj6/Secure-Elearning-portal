@@ -13,7 +13,8 @@ const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, r
 
   const cartTitle = product ? product.name : "A photo from pexels";
   const cartDescrption = product ? product.description : "Default description";
-  const cartPrice = product ? product.price : "DEFAULT";
+  const cartbuyPrice = product ? product.buyPrice : "DEFAULT";
+  const cartrentPrice = product ? product.rentPrice : "DEFAULT";
 
   const addToCart = () => {
     addItemToCart(product,0, () => setRedirect(true));
@@ -104,7 +105,7 @@ const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, r
         <p className="card-header lead">
           {`${cartDescrption.substring(0, 200)}...`}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
+        <p className="btn btn-success rounded  btn-sm px-6">Rs.{cartbuyPrice}/{cartrentPrice}</p>
         <div className="row">
           <div className="col-12">{showCourseInfo(courseInfo)}</div>
           <div className="col-12">{showAddToCart(addtoCart)}</div>
