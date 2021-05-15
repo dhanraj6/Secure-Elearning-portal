@@ -59,10 +59,10 @@ export default function Home() {
     {
       console.log(productIdArray[i]._id)
       if(productIdArray[i] === products[i]._id ){
-        plist.push(products[i]._id);
+        plist.push(products[i]);
       }
       else{
-        nlist.push(products[i]._id);
+        nlist.push(products[i]);
       }   
     }
     console.log(plist)

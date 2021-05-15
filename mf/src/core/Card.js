@@ -105,7 +105,7 @@ const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, r
         <p className="card-header lead">
           {`${cartDescrption.substring(0, 200)}...`}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-6">Rs.{cartbuyPrice}/{cartrentPrice}</p>
+        <p className="btn btn-success rounded  btn-sm px-6">$ {cartbuyPrice}/{cartrentPrice}</p>
         <div className="row">
           <div className="col-12">{showCourseInfo(courseInfo)}</div>
           <div className="col-12">{showAddToCart(addtoCart)}</div>

@@ -129,6 +129,7 @@ const AddProduct = () => {
             filePath: response.data.filePath,
             fileName: response.data.fileName
           }
+          alert("Video Uploaded Successfully")
           setFilePath(response.data.filePath)
 
           //gerenate thumbnail with this filepath ! 
