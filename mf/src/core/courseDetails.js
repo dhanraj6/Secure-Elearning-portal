@@ -77,6 +77,7 @@ const CourseDetails = ({ match }) => {
                     prod.push(data[i].products[0]._id);
                 }
                 setproductArray(prod);
+                console.log(data)
             }
         });
     };

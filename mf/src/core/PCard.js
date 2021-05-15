@@ -3,7 +3,7 @@ import ImageHelper from "./helper/ImageHelper";
 import { Redirect } from "react-router-dom";
 import "./style.css"
  
-const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
+const PCard = ({ product,courseInfo=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
   const [infoRedirect, setinfoRedirect] = useState(false);
   
   const cartTitle = product ? product.name : "A photo from pexels";
@@ -41,10 +41,6 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
       <div className="card-body">
         {redirectInfo(infoRedirect)}
          <ImageHelper product={product} />
-        <p className="card-header lead">
-          {`${cartDescrption.substring(0, 200)}...`}
-        </p>
-        <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
         <div className="row">
           <div className="col-12">{showCourseInfo(courseInfo)}</div>
         </div>
@@ -53,4 +49,4 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
   );
 };
 
-export default Card;
+export default PCard;

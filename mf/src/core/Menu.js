@@ -38,6 +38,17 @@ const Menu = ({ history }) => (
           </Link>
         </li>
       )}
+      {isAutheticated() && isAutheticated().user.role === 0 && (
+        <li className="nav-item">
+          <Link
+            style={currentTab(history, "/course/enrolments")}
+            className="nav-link"
+            to="/course/enrolments"
+          >
+            My Enrolments
+          </Link>
+        </li>
+      )}
       {isAutheticated() && isAutheticated().user.role === 1 && (
         <li className="nav-item">
           <Link
@@ -71,12 +82,7 @@ const Menu = ({ history }) => (
           </li>
         </Fragment>
       )}
-      <li className="nav-item">
-        <Link style={currentTab(history, "/about")} className="nav-link" to="/about">
-          About
-        </Link>
-      </li>
-
+    
       {isAutheticated() && (
         <li className="nav-item">
           <span
@@ -91,6 +97,12 @@ const Menu = ({ history }) => (
           </span>
         </li>
       )}
+
+      <li className="nav-item">
+        <Link style={currentTab(history, "/about")} className="nav-link" to="/about">
+          About
+        </Link>
+      </li>
 
     </ul>
   </div>

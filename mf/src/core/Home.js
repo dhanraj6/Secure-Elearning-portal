@@ -22,6 +22,8 @@ export default function Home() {
   const userId = isAutheticated() && isAutheticated().user._id;
   const token = isAutheticated() && isAutheticated().token;
 
+  
+
   const loadAllProduct = () => {
 
     let prod =[];
@@ -35,7 +37,6 @@ export default function Home() {
                 prod.push(data[i].products[0]._id);
             }
             setproductArray(prod);
-            //console.log(prod)
         }
     });
 
@@ -49,10 +50,6 @@ export default function Home() {
     });
 
   };
-
-  useEffect(() => {
-    loadAllProduct();
-  }, []);
 
   const checkPurchase = () => {
     for(let i=0;i<products.length;i++)
@@ -71,12 +68,17 @@ export default function Home() {
     setPurchased(plist);
   }
 
+  useEffect(() => {
+    checkPurchase();
+    loadAllProduct();  
+  }, []);
+
   return (
     <Base title="" description="">
       <div className="text-center">
         <h1 className="bg-dark text-white text-center">All Courses</h1>
-        {/* <button onSubmit={checkPurchase()}> </button>   */}
         <div className=" layoutChanger">
+          
           {products.map((product, index) => {
             return (
               <div key={index} className="col-4 mb-4">

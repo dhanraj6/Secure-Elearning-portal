@@ -19,6 +19,7 @@ import About from "./generalPages/about"
 import ContactUs from "./generalPages/contactUs"
 import CourseDetails from "./core/courseDetails"
 import CourseMain from "./core/startCourse"
+import MyEnrolments from "./core/myenrolments"
 
 
 const Routes = () => {
@@ -32,6 +33,7 @@ const Routes = () => {
         <Route path="/signin" exact component={Signin} />
         <Route path="/cart" exact component={Cart} />
         <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
+        <PrivateRoute path="/course/enrolments" exact component={MyEnrolments} />
         <PrivateRoute path="/course/video/:productId" exact component={CourseMain} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard} />
