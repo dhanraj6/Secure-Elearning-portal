@@ -66,7 +66,7 @@ const Paymentb = ({products,setReload = f => f, reload = undefined}) => {
               const orderData = {
                 products: products,
                 transaction_id: response.transaction.id,
-                amount: response.transaction.amount,
+                amount: response.transaction.amount
               };
               createOrder(userId, token, orderData);
               cartEmpty(() => {

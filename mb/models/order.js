@@ -30,6 +30,10 @@ const OrderSchema = new Schema({
     user: {
         type:ObjectId,
         ref: "User"
+    },
+    buyType:
+    {
+        type:Number
     }
 },
 {timestamps: true}
