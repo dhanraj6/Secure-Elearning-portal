@@ -12,8 +12,6 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
 
   const cartTitle = sProduct ? sProduct.name : "A photo from pexels";
   const cartDescrption = sProduct ? sProduct.description : "Default description";
-  const cartbuyPrice = sProduct ? sProduct.buyPrice : "DEFAULT";
-  const cartrentPrice = sProduct ? sProduct.rentPrice : "DEFAULT";
 
   const loadProduct = (product) => {
 
@@ -53,7 +51,7 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
           onClick={gotoInfo}
           className="btn btn-block btn-outline-info mt-2 mb-2"
         >
-          Know More
+          Start learning
         </button>
       )
     );
