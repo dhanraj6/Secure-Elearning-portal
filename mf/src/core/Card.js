@@ -5,17 +5,22 @@ import { addItemToCart } from "./helper/cartHelper";
 import {removeItemFromCart} from "./helper/cartHelper"
 import "./style.css"
  
-const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
+const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, removeFromCart = false, setReload= f =>f , reload=undefined }) => {
   const [redirect, setRedirect] = useState(false);
   const [infoRedirect, setinfoRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
+  const [buyType,setBuyType]=useState(1);
 
   const cartTitle = product ? product.name : "A photo from pexels";
   const cartDescrption = product ? product.description : "Default description";
   const cartPrice = product ? product.price : "DEFAULT";
 
   const addToCart = () => {
-    addItemToCart(product, () => setRedirect(true));
+    addItemToCart(product,0, () => setRedirect(true));
+  };
+
+  const addToCartRent = () => {
+    addItemToCart(product,1, () => setRedirect(true));
   };
 
   const getARedirect = redirect => {
@@ -55,7 +60,20 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
           onClick={addToCart}
           className="btn btn-block btn-outline-success mt-2 mb-2"
         >
-          Add to Cart
+         Buy this Course
+        </button>
+      )
+    );
+  };
+
+  const showRentCourse = addtoCartRent => {
+    return (
+      addtoCartRent && (
+        <button
+          onClick={addToCartRent}
+          className="btn btn-block btn-outline-success mt-2 mb-2"
+        >
+          Rent this Course
         </button>
       )
     );
@@ -91,6 +109,7 @@ const Card = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fals
           <div className="col-12">{showCourseInfo(courseInfo)}</div>
           <div className="col-12">{showAddToCart(addtoCart)}</div>
           <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>
+          <div className="col-12">{showRentCourse(addtoCartRent)}</div>
         </div>
       </div>
     </div>

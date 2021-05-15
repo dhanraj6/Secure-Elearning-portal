@@ -1,4 +1,4 @@
-export const addItemToCart = (item, next) => {
+export const addItemToCart = (item, buyType,next) => {
     let cart = [];
     if (typeof window !== undefined) {
       if (localStorage.getItem("cart")) {
@@ -6,6 +6,7 @@ export const addItemToCart = (item, next) => {
       }
       cart.push({
         ...item,
+        buyType:buyType,
         count: 1
       });
       localStorage.setItem("cart", JSON.stringify(cart));

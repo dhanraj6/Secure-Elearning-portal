@@ -6,7 +6,7 @@ import {createOrder} from "./helper/orderHelper";
 import { isAutheticated } from "../auth/helper";
 import DropIn from "braintree-web-drop-in-react"
 
-const Paymentb = ({products, setReload = f => f, reload = undefined}) => {
+const Paymentb = ({products,setReload = f => f, reload = undefined}) => {
 
     const [info, setInfo] = useState({
         loading: false,
@@ -66,7 +66,7 @@ const Paymentb = ({products, setReload = f => f, reload = undefined}) => {
               const orderData = {
                 products: products,
                 transaction_id: response.transaction.id,
-                amount: response.transaction.amount
+                amount: response.transaction.amount,
               };
               createOrder(userId, token, orderData);
               cartEmpty(() => {
@@ -85,7 +85,12 @@ const Paymentb = ({products, setReload = f => f, reload = undefined}) => {
       const getAmount = () => {
         let amount = 0;
         products.map(p => {
-          amount = amount + p.price;
+          if(p.buyType==1){
+          amount = amount + p.rentPrice;
+          }
+          if(p.buyType==0){
+            amount = amount + p.buyPrice;
+            }
         });
         return amount;
       };

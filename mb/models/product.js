@@ -26,7 +26,13 @@ const productSchema = new Schema({
         trim: true,
         required: true,
     },
-    price: {
+    buyPrice: {
+        type: Number,
+        required: true,
+        maxlength: 32,
+        trim: true
+    },
+    rentPrice: {
         type: Number,
         required: true,
         maxlength: 32,

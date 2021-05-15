@@ -30,9 +30,9 @@ exports.createProduct = (req, res) => {
         }
         //console.log(fields)
         //destructure the fiekds 
-        const {name, description, price, category, stock,creator, filePath} = fields
+        const {name, description, buyPrice,rentPrice, category, stock,creator, filePath} = fields
 
-        if(!name || !description || !price || !category || !stock || !creator || !filePath){
+        if(!name || !description || !buyPrice || !rentPrice || !category || !stock || !creator || !filePath){
             return res.status(400).json({
                 error: "Please include all fields"
             });

@@ -6,6 +6,7 @@ import Card from "./Card";
 import { loadCart } from "./helper/cartHelper";
 import Paymentb from "./Paymentb";
 
+
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const [reload, setReload] = useState(false);
@@ -24,6 +25,7 @@ const Cart = () => {
             product={product}
             removeFromCart={true}
             addtoCart={false}
+            addtoCartRent={false}
             setReload={setReload}
             reload={reload}
           />

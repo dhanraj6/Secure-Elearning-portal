@@ -13,7 +13,8 @@ const AddProduct = () => {
     name: "",
     creator: "",
     description: "",
-    price: "",
+    buyPrice: "",
+    rentPrice:"",
     resource: "",
     stock: "",
     photo: "",
@@ -30,7 +31,8 @@ const AddProduct = () => {
     name,
     creator,
     description,
-    price,
+    buyPrice,
+    rentPrice,
     stock,
     categories,
     category,
@@ -76,7 +78,8 @@ const AddProduct = () => {
           name: "",
           creator: "",
           description: "",
-          price: "",
+          buyPrice:"",
+          rentPrice:"",
           photo: "",
           resource: "",
           stock: "",
@@ -198,11 +201,6 @@ const AddProduct = () => {
           />
         </label>
       </div>
-
-
-
-
-
       <div className="form-group">
         <input
           onChange={handleChange("name")}
@@ -223,11 +221,20 @@ const AddProduct = () => {
       </div>
       <div className="form-group">
         <input
-          onChange={handleChange("price")}
+          onChange={handleChange("buyPrice")}
           type="number"
           className="form-control"
-          placeholder="Price"
-          value={price}
+          placeholder="buyPrice"
+          value={buyPrice}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          onChange={handleChange("rentPrice")}
+          type="number"
+          className="form-control"
+          placeholder="rentPrice"
+          value={rentPrice}
         />
       </div>
       <div className="form-group">
