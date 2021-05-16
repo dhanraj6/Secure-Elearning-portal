@@ -9,6 +9,7 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
   const [infoRedirect, setinfoRedirect] = useState(false);
   const [ sProduct, setsProduct] = useState(false);
   const [error, setError] = useState(false);
+  const [courseRedirect, setCourseRedirect] = useState(false);
 
   const cartTitle = sProduct ? sProduct.name : "A photo from pexels";
   const cartDescrption = sProduct ? sProduct.description : "Default description";
@@ -44,14 +45,25 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
     }
   }
 
-  const showCourseInfo = courseInfo => {
+  const gotoCourse = () => {
+      setCourseRedirect(true);
+  }
+
+
+  const redirectCourse = courseRedirect => {
+      if (courseRedirect) {
+          return <Redirect to={`/course/video/${sProduct._id}`} />
+      }
+  }
+
+  const startCourse = () => {
     return (
-      courseInfo && (
+      true && (
         <button
-          onClick={gotoInfo}
+          onClick={gotoCourse}
           className="btn btn-block btn-outline-info mt-2 mb-2"
         >
-          Start learning
+          Start Course
         </button>
       )
     );
@@ -68,7 +80,9 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
           {`${cartDescrption.substring(0, 200)}...`}
         </p>
         <div className="row">
-          <div className="col-12">{showCourseInfo(courseInfo)}</div>
+          <div className="col-12">{redirectCourse(courseRedirect)}</div>
+          <div className="col-12">{startCourse()}</div>
+
         </div>
       </div>
     </div>

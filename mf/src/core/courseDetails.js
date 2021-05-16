@@ -182,7 +182,7 @@ const CourseDetails = ({ match }) => {
 
     console.log(productIdArray)
 
-    const checkSubscribed = productIdArray.includes(match.params.productId);
+    /* const checkSubscribed = productIdArray.includes(match.params.productId);
     
     const startCourse = () => {
         return checkSubscribed && (
@@ -195,7 +195,7 @@ const CourseDetails = ({ match }) => {
                 </button>
             )
         );
-    };
+    }; */
 
 
     // const getUserPurchaseList = (userId, token) => {
@@ -221,7 +221,7 @@ const CourseDetails = ({ match }) => {
                 <div className="container ">
                     <div>
                         {redirectCourse(courseRedirect)}
-                        {startCourse()}
+                        {/* {startCourse()} */}
                     </div>
                     {features()}
                     {contentList()}
