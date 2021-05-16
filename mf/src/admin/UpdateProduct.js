@@ -3,14 +3,19 @@ import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { getCategories, getProduct, updateProduct} from "./helper/adminapicall";
 import { isAutheticated} from "../auth/helper";
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
 
 const UpdateProduct = ({ match }) => {
   const { user, token } = isAutheticated();
 
   const [values, setValues] = useState({
     name: "",
+    creator: "",
     description: "",
-    price: "",
+    buyPrice: "",
+    rentPrice:"",
+    resource: "",
     stock: "",
     photo: "",
     categories: [],
@@ -18,23 +23,28 @@ const UpdateProduct = ({ match }) => {
     loading: false,
     error: "",
     createdProduct: "",
-    getRedirect: false,
-    formData: "",
+    getaRedirect: false,
+    formData: ""
   });
 
   const {
     name,
+    creator,
     description,
-    price,
+    buyPrice,
+    rentPrice,
     stock,
     categories,
     category,
     loading,
     error,
     createdProduct,
-    getRedirect,
-    formData,
+    getaRedirect,
+    formData
   } = values;
+
+  const [FilePath, setFilePath] = useState("")
+  const [Duration, setDuration] = useState("")
 
   const preload = (productId) => {
     getProduct(productId).then((data) => {
@@ -72,6 +82,44 @@ const UpdateProduct = ({ match }) => {
     preload(match.params.productId);
   }, []);
 
+
+  const onDrop = (files) => {
+    let formData = new FormData();
+    const config = {
+      header: { 'content-type': 'multipart/form-data' }
+    }
+    console.log(files)
+    formData.append("file", files[0])
+    console.log("preeeeeedone")
+
+    //AddaVideo(formData, config)
+    axios.post('http://localhost:8000/api/video/uploadfiles', formData, config)
+      .then(response => {
+        if (response.data.success) {
+
+          let variable = {
+            filePath: response.data.filePath,
+            fileName: response.data.fileName
+          }
+          alert("Video Uploaded Successfully")
+          setFilePath(response.data.filePath)
+
+          //gerenate thumbnail with this filepath ! 
+          // axios.post('/api/video/thumbnail', variable)
+          // .then(response => {
+          //     if (response.data.success) {
+          //         setDuration(response.data.fileDuration)
+          //         setThumbnail(response.data.thumbsFilePath)
+          //     } else {
+          //         alert('Failed to make the thumbnails');
+          //     }
+          // })
+        } else {
+          alert('failed to save the video in server')
+        }
+      })
+  }
+
   //TODO
   const onSubmit = (event) => {
     event.preventDefault();
@@ -85,22 +133,40 @@ const UpdateProduct = ({ match }) => {
           setValues({
             ...values,
             name: "",
+            creator: "",
             description: "",
-            price: "",
+            buyPrice:"",
+            rentPrice:"",
             photo: "",
+            resource: "",
             stock: "",
             loading: false,
-            createdProduct: data.name,
+            createdProduct: data.name
           });
         }
       }
     );
   };
 
-  const handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+  const handleChange = name => event => {
+    if (name == "name") {
+      formData.set("creator", user._id);
+    }
+    if(name==="resource"){
+      const value1 = event.target.files[0]; 
+      formData.set(name, value1);
+      setValues({ ...values, [name]: value1 });
+    }
+    else if(name==="photo"){
+    const value = event.target.files[0];
     formData.set(name, value);
     setValues({ ...values, [name]: value });
+    }
+    else{
+      const value2 = event.target.value;
+      formData.set(name, value2);
+      setValues({ ...values, [name]: value2 });
+    }
   };
 
   const successMessage = () => (
@@ -115,6 +181,24 @@ const UpdateProduct = ({ match }) => {
   const createProductForm = () => (
     <form>
       <span>Post video</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Dropzone
+          onDrop={onDrop}
+          multiple={false}
+          maxSize={800000000}>
+          {({ getRootProps, getInputProps }) => (
+            <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              {...getRootProps()}
+            >
+              <input {...getInputProps()} />
+              {/*<Icon type="plus" style={{ fontSize: '3rem' }} />*/}
+
+            </div>
+          )}
+        </Dropzone>
+      </div>
+      <br></br>
+      <span>Thumbnail photo</span>
       <div className="form-group">
         <label className="btn btn-block btn-success">
           <input
@@ -122,6 +206,18 @@ const UpdateProduct = ({ match }) => {
             type="file"
             name="photo"
             accept="image"
+            placeholder="choose a file"
+          />
+        </label>
+      </div>
+      <span>Course Resources</span>
+      <div className="form-group">
+        <label className="btn btn-block btn-success">
+          <input
+            onChange={handleChange("resource")}
+            type="file"
+            name="resource"
+            //accept="file"
             placeholder="choose a file"
           />
         </label>
@@ -146,11 +242,20 @@ const UpdateProduct = ({ match }) => {
       </div>
       <div className="form-group">
         <input
-          onChange={handleChange("price")}
+          onChange={handleChange("buyPrice")}
           type="number"
           className="form-control"
-          placeholder="Price"
-          value={price}
+          placeholder="buyPrice"
+          value={buyPrice}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          onChange={handleChange("rentPrice")}
+          type="number"
+          className="form-control"
+          placeholder="rentPrice"
+          value={rentPrice}
         />
       </div>
       <div className="form-group">

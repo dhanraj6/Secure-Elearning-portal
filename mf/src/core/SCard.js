@@ -82,7 +82,6 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
         <div className="row">
           <div className="col-12">{redirectCourse(courseRedirect)}</div>
           <div className="col-12">{startCourse()}</div>
-
         </div>
       </div>
     </div>

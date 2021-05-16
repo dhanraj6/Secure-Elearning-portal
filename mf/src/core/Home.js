@@ -77,7 +77,7 @@ export default function Home() {
     <Base title="" description="">
       <div className="text-center">
         <h1 className="bg-dark text-white text-center">All Courses</h1>
-        <div className=" layoutHome">
+        <div className=" layoutChanger">
           {products.map((product, index) => {
             return (
               <div key={index} className="col-4 mb-4">
