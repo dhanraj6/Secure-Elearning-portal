@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
-import { API } from "../backend";
 import Base from "./Base";
-import Card from "./Card";
 import { getProduct} from "../admin/helper/adminapicall";
 import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
-
-
-
+import Comments from "./Comments"; 
+import axios from "axios";
 
 export default function CourseMain({match}) {
+
+
+    const [CommentLists, setCommentLists] = useState([])
 
     const [values, setValues] = useState({
         name: "",
@@ -35,6 +35,11 @@ export default function CourseMain({match}) {
         resource,
     } = values;
 
+    const videoId = match.params.productId
+
+    const videoVariable = {
+        videoId: videoId
+    }
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -55,6 +60,17 @@ export default function CourseMain({match}) {
                 });
             }
         });
+
+
+        axios.post('http://localhost:8000/api/comment/getComments', videoVariable)
+            .then(response => {
+                if (response.data.success) {
+                    console.log('response.data.comments',response.data.comments)
+                    setCommentLists(response.data.comments)
+                } else {
+                    alert('Failed to get video Info')
+                }
+            })
     };
 
 
@@ -63,6 +79,11 @@ export default function CourseMain({match}) {
     }, []);
 
   console.log(resource)
+
+  const updateComment =  (newComment) => {
+    setCommentLists(CommentLists.concat(newComment))
+  }
+
 
   return (
     <Base title="" description="">
@@ -78,6 +99,7 @@ export default function CourseMain({match}) {
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
         </video>
+        <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
         <hr></hr>    
       </div>
     </Base>

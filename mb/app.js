@@ -12,7 +12,8 @@ const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const orderRoutes = require("./routes/order");
 const paymentBRoutes = require("./routes/paymentBRoutes");
-const videoRoute = require("./routes/video")
+const videoRoute = require("./routes/video");
+const commentRoute = require("./routes/comment");
 
 
 //DB CONNECTION
@@ -39,6 +40,7 @@ app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", paymentBRoutes);
 app.use("/api", videoRoute);
+app.use("/api",commentRoute);
 
 //app.use('/api/video', require('./routes/video'));
 //app.use('/uploads', express.static('uploads'));
