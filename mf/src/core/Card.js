@@ -97,7 +97,7 @@ const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, r
   };
   return (
     <div className="card text-white bg-dark cardsStyle">
-      <div className="card-header lead">{cartTitle}</div>
+      <div className="card-header lead" style={{minHeight:"100px"},{overflow:"hidden"}}>{`${cartTitle.substring(0,50)}...`}</div>
       <div className="card-body">
         {getARedirect(redirect)}
         {redirectInfo(infoRedirect)}
@@ -105,7 +105,7 @@ const Card = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, r
         <p className="card-header lead">
           {`${cartDescrption.substring(0, 200)}...`}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-6">$ {cartbuyPrice}/{cartrentPrice}</p>
+        <p className="btn btn-success rounded  btn-sm px-6">Rs. {cartbuyPrice}/{cartrentPrice}</p>
         <div className="row">
           <div className="col-12">{showCourseInfo(courseInfo)}</div>
           <div className="col-12">{showAddToCart(addtoCart)}</div>
