@@ -6,7 +6,7 @@ import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
 import Comments from "./Comments"; 
 import axios from "axios";
-
+import Lesson from "./Lessons/Lesson";
 export default function CourseMain({match}) {
 
 
@@ -93,9 +93,10 @@ export default function CourseMain({match}) {
         <hr></hr>
         {/* <h4>resource : {resource}</h4> */}
         <h5>Video</h5>
-        <video style={{ width: '100%',height:"80vh" }} controls >
+        {/* <video style={{ width: '100%',height:"80vh" }} controls >
             <source src={abc} type="video/mp4" />
-        </video>
+        </video> */}
+        <Lesson url={filePath} />
         <p style={{fontWeight:"bold",width:"80%",textAlign:"center",margin:"0 auto"}}> {description}</p>
         <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
         <hr></hr>    

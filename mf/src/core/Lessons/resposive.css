@@ -1,0 +1,32 @@
+.player-wrapper {
+  position: relative;
+  padding-top: 55.25% /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.markerIs{
+  padding: 10px 25px;
+  border-radius: 5px;
+  border-style: none;
+  margin: 20px 0;
+  display: inline-block;
+  color: white;
+  background-color: rgb(29, 235, 29);
+}
+.markerIs:hover{
+  box-shadow: white 1px;
+  transform: translateY(-2px);
+}
+
+.markerNot{
+  padding: 10px 25px;
+  margin: 20px 0;
+  display: inline-block;
+  color: white;
+  background-color: darkgray;
+}
