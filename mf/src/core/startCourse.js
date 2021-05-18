@@ -95,8 +95,8 @@ export default function CourseMain({match}) {
         <h5>Video</h5>
         {/* <video style={{ width: '100%',height:"80vh" }} controls >
             <source src={abc} type="video/mp4" />
-        </video> */}
-        <Lesson url={filePath} />
+        </video>  */}
+         <Lesson url={filePath} /> 
         <p style={{fontWeight:"bold",width:"80%",textAlign:"center",margin:"0 auto"}}> {description}</p>
         <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
         <hr></hr>    

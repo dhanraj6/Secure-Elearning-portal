@@ -46,27 +46,22 @@ function SingleComment(props) {
 
     return (
         <div>
-            <Comment
-                actions={actions}
-                author={props.comment.writer.name}
-                content={
-                    <p>
-                        {props.comment.content}
-                    </p>
-                }
-            ></Comment>
+            <div>
+                <ul className="justify-content-between">
+                    <li className="list-group-item list-group-item-dark ">                
+                        <span className="badge badge-info mr-2">Name: {props.comment.writer.name}</span> 
+                        <span className="badge-warning mr-2"> {props.comment.content}</span> 
+                        <span className="badge badge-secondary mr-2">{actions}</span> 
+                    </li>
+                </ul>
+            </div>
 
-
-            {OpenReply &&
-                <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                    <TextArea
-                        style={{ width: '100%', borderRadius: '5px' }}
-                        onChange={handleChange}
-                        value={CommentValue}
-                        placeholder="write some comments"
-                    />
-                    <br />
-                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
+            {OpenReply &&   
+                < form className="form-inline" onSubmit={onSubmit}>
+                        <div class="form-group mx-sm-3 mb-2">
+                        <input class="form-control"  placeholder="write some comments " value={CommentValue} onChange={handleChange}/>
+                        </div>
+                        <button type="submit"  onClick={onSubmit}  class="btn btn-primary mb-2">Submit</button>    
                 </form>
             }
 
