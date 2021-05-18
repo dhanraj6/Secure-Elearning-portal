@@ -2,6 +2,7 @@ const Product = require("../models/product");
 const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
+const { sortBy } = require("lodash");
 
 exports.getProductById = (req, res, next, id) => {
 
@@ -30,9 +31,9 @@ exports.createProduct = (req, res) => {
         }
         //console.log(fields)
         //destructure the fiekds 
-        const {name, description, buyPrice,rentPrice, category, stock,creator, filePath} = fields
+        const {name, description, buyPrice,rentPrice, category, stock,creator} = fields
 
-        if(!name || !description || !buyPrice || !rentPrice || !category || !stock || !creator || !filePath){
+        if(!name || !description || !buyPrice || !rentPrice || !category || !stock || !creator){
             return res.status(400).json({
                 error: "Please include all fields"
             });
@@ -42,7 +43,7 @@ exports.createProduct = (req, res) => {
 
         //handling of file
         if(file.photo){
-            if(file.photo.size > 3000000){
+            if(file.photo.size > 5000000){
                 return res.status(400).json({
                     error: "file size too big"
                 });
@@ -153,7 +154,7 @@ exports.updateProduct = (req, res) => {
 };
 
 exports.getAllProducts = (req, res) => {
-    let limit = req.query.limit ? parseInt(req.query.limit): 8;
+    let limit = req.query.limit ? parseInt(req.query.limit): 9;
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
 
     Product.find()
@@ -170,6 +171,28 @@ exports.getAllProducts = (req, res) => {
         res.json(products)
     });
 };
+
+
+exports.getProductByCategory= (req,res) =>
+{
+    let cate = req.body;
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    Product.find({category:cate})
+    .select("-photo")
+    .populate("category")
+    .sort([[sortBy, "asc"]])
+    .limit(limit)
+    .exec((err,products)=>{
+        if(err){
+            return res.status(200).json({
+                error:"No product found"
+            })
+        }
+        console.log(products)
+        res.json(products)
+    })
+}
+
 
 
 exports.getAllUniqueCategories = (req, res) => {

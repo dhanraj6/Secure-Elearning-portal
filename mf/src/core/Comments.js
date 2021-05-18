@@ -38,7 +38,8 @@ function Comments(props) {
     return (
         <div>
             <br />
-            <p> replies</p>
+            <hr></hr>
+            <p style={{color:"yellow",fontWeight:"bold",textDecorationLine:"underline",cursor:"pointer" }}> Interact with the community</p>
             <hr />
             {/* Comment Lists  */}
             {console.log(props.CommentLists)}

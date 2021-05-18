@@ -88,17 +88,15 @@ export default function CourseMain({match}) {
   return (
     <Base title="" description="">
       <div className="text-center">
-        <h3>Main course Page</h3>
         <hr></hr>
-        <h4>Enrolled course : {name}</h4>
-        <hr></hr>
-        <h4>Course Description : {description}</h4>
+        <h4 style={{fontWeight:"bold"}}>{name}</h4>
         <hr></hr>
         {/* <h4>resource : {resource}</h4> */}
-        <h4>Video</h4>
-        <video style={{ width: '100%' }} controls >
+        <h5>Video</h5>
+        <video style={{ width: '100%',height:"80vh" }} controls >
             <source src={abc} type="video/mp4" />
         </video>
+        <p style={{fontWeight:"bold",width:"80%",textAlign:"center",margin:"0 auto"}}> {description}</p>
         <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
         <hr></hr>    
       </div>
