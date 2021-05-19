@@ -6,6 +6,7 @@ import Card from "./Card";
 import { getProduct} from "../admin/helper/adminapicall";
 import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
+//import useFileDownloader from "hooks/useFileDownloader"
 
 
 
@@ -56,7 +57,10 @@ export default function CourseMain({match}) {
             }
         });
     };
-
+    
+    //const downloadFile = useFileDownloader();
+    //const download = (resource) => downloadFile(resource);
+    
 
     useEffect(() => {
         preload(match.params.productId);
@@ -78,6 +82,10 @@ export default function CourseMain({match}) {
         <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
         </video>
+
+        <div style={{textAlign:"center"}}>
+            <button className='btn btn-success btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
+        </div>
         <hr></hr>    
       </div>
     </Base>
