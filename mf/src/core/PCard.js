@@ -33,8 +33,6 @@ const PCard = ({ product,courseInfo=true, addtoCart = true, removeFromCart = fal
     );
   };
 
-
-  
   return (
     <div className="card text-white bg-dark cardsStyle">
       <div className="card-header lead">{cartTitle}</div>

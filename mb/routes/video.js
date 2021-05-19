@@ -3,7 +3,6 @@ const router = express.Router();
 const multer = require('multer');
 const Product = require("../models/product");
 
-
 var storage = multer.diskStorage({
     destination:  (req, file, cb) => {
         cb(null, '../mf/src/assets/uploads')
@@ -55,6 +54,5 @@ router.post("/video/getVideo", (req, res) => {
         res.status(200).json({ success: true, video })
     })
 });
-
 
 module.exports = router;

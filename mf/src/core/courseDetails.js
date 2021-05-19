@@ -135,14 +135,14 @@ const CourseDetails = ({ match }) => {
                         <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span className="badge bg-info p-3 rounded-pill">14 </span>
+                    <span className="badge bg-info p-3 white rounded-pill">5 </span>
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-start rounded">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span className="badge bg-info p-3 rounded-pill">14</span>
+                    <span className="badge bg-info p-3 white rounded-pill">8</span>
 
                 </li>
                 <li className="list-group-item d-flex justify-content-between align-items-start rounded">
@@ -150,7 +150,7 @@ const CourseDetails = ({ match }) => {
                         <div className="fw-bold">Subheading</div>
       Cras justo odio
     </div>
-                    <span className="badge bg-info p-3 rounded-pill">14</span>
+                    <span className="badge bg-info p-3 white rounded-pill">9</span>
                 </li>
             </ol>
         )
