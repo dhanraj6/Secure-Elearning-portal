@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
+import { API } from "../backend";
 import Base from "./Base";
+import Card from "./Card";
 import { getProduct} from "../admin/helper/adminapicall";
 import "./style.css"
 import abc from  "../assets/uploads/Python.mp4"
-import Comments from "./Comments"; 
-import axios from "axios";
-import Lesson from "./Lessons/Lesson";
+//import useFileDownloader from "hooks/useFileDownloader"
+
+
+
+
 export default function CourseMain({match}) {
-
-
-    const [CommentLists, setCommentLists] = useState([])
 
     const [values, setValues] = useState({
         name: "",
@@ -35,11 +36,6 @@ export default function CourseMain({match}) {
         resource,
     } = values;
 
-    const videoId = match.params.productId
-
-    const videoVariable = {
-        videoId: videoId
-    }
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -60,19 +56,11 @@ export default function CourseMain({match}) {
                 });
             }
         });
-
-
-        axios.post('http://localhost:8000/api/comment/getComments', videoVariable)
-            .then(response => {
-                if (response.data.success) {
-                    console.log('response.data.comments',response.data.comments)
-                    setCommentLists(response.data.comments)
-                } else {
-                    alert('Failed to get video Info')
-                }
-            })
     };
-
+    
+    //const downloadFile = useFileDownloader();
+    //const download = (resource) => downloadFile(resource);
+    
 
     useEffect(() => {
         preload(match.params.productId);
@@ -80,25 +68,23 @@ export default function CourseMain({match}) {
 
   console.log(resource)
 
-  const updateComment =  (newComment) => {
-    setCommentLists(CommentLists.concat(newComment))
-  }
-
-
   return (
     <Base title="" description="">
       <div className="text-center">
+        <h3>Main course Page</h3>
         <hr></hr>
-        <h4 style={{fontWeight:"bold"}}>{name}</h4>
+        <h4>Enrolled course : {name}</h4>
+        <hr></hr>
+        <h4>Course Description : {description}</h4>
         <hr></hr>
         {/* <h4>resource : {resource}</h4> */}
-        <h5>Video</h5>
-        {/* <video style={{ width: '100%',height:"80vh" }} controls >
+        <h4>Video</h4>
+        <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
-        </video>  */}
-         <Lesson url={filePath} /> 
-        <p style={{fontWeight:"bold",width:"80%",textAlign:"center",margin:"0 auto"}}> {description}</p>
-        <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
+        </video>
+        <div style={{textAlign:"center"}}>
+            <button className='btn btn-success btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
+        </div>
         <hr></hr>    
       </div>
     </Base>
