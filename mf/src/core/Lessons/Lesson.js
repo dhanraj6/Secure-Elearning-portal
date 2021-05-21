@@ -11,6 +11,7 @@ const Lesson = ({ url, }) => {
             setWatchComplete(true);
             setCertificateStatus("Course Completed Get Certificate")
             setStyling("markerIs")
+            // setUserCertificateStatus()
 
         }
     }

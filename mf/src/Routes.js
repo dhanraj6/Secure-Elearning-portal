@@ -20,7 +20,7 @@ import ContactUs from "./generalPages/contactUs"
 import CourseDetails from "./core/courseDetails"
 import CourseMain from "./core/startCourse"
 import MyEnrolments from "./core/myenrolments"
-import Certificate from "./core/Certification"
+import CertificateMain from "./blockchain/CertificateApp"
 
 
 const Routes = () => {
@@ -33,8 +33,9 @@ const Routes = () => {
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/cart" exact component={Cart} />
-        <Route path="/certification" exact component={Certificate} />
+        <Route path="/certificate" exact component={Certificate} />
         <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
+        <PrivateRoute path="/certificate" exact component={CertificateMain} />
         <PrivateRoute path="/course/enrolments" exact component={MyEnrolments} />
         <PrivateRoute path="/course/video/:productId" exact component={CourseMain} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />
