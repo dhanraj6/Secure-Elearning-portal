@@ -33,7 +33,7 @@ const Routes = () => {
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/cart" exact component={Cart} />
-        <Route path="/certificate" exact component={Certificate} />
+        {/* <Route path="/certificate" exact component={Certificate} /> */}
         <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
         <PrivateRoute path="/certificate" exact component={CertificateMain} />
         <PrivateRoute path="/course/enrolments" exact component={MyEnrolments} />
