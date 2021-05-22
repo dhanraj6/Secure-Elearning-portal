@@ -35,7 +35,7 @@ const Routes = () => {
         <Route path="/cart" exact component={Cart} />
         {/* <Route path="/certificate" exact component={Certificate} /> */}
         <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
-        <PrivateRoute path="/certificate" exact component={CertificateMain} />
+        <PrivateRoute path="/certificate/:productId" exact component={CertificateMain} />
         <PrivateRoute path="/course/enrolments" exact component={MyEnrolments} />
         <PrivateRoute path="/course/video/:productId" exact component={CourseMain} />
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />

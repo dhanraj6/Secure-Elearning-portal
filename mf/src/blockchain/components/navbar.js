@@ -7,9 +7,6 @@ class Navhead extends Component {
   render() {
     return (
       <Navbar className="bar" bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand mb={0} href="#home">
-          DigitalBlock
-        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">

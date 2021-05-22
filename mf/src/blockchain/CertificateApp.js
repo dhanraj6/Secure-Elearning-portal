@@ -9,8 +9,14 @@ import Reg from "./components/registration";
 import Intro from "./components/intro";
 import certcontract from "./config.js";
 import Certificate from "./components/certificate";
-
+import {isAutheticated} from "../auth/helper/index"
+// userId = isAutheticated() && isAutheticated().user._id;
+// Uname = isAutheticated() && isAutheticated().user.name;
+// const user: { name, email, role }
+// } = isAutheticated();
+  
 class CertificateMain extends Component {
+    
   state = {
     account: "",
     name: "",
@@ -22,6 +28,7 @@ class CertificateMain extends Component {
   };
   componentDidMount() {
     console.log('mounted')
+    // loadUserCourseData();
     this.loadBlockchainData();
   }
 
@@ -44,7 +51,7 @@ class CertificateMain extends Component {
   add = data => {
     //const certificates = new this.state.web3.eth.Contract(abi, address);
     //console.log(data.fname, data.course, data.email);
-    var name = data.fname + " " + data.lname;
+    var name = data.fname;
     certcontract.methods.addcert(name, data.course, data.email).send(
       {
         from: this.state.account,
@@ -53,7 +60,7 @@ class CertificateMain extends Component {
       (error, result) => {
         if (error) console.log("error " + error);
         else {
-          this.setState({ name: data.fname + " " + data.lname });
+          this.setState({ name: isAutheticated().user.name});
           this.setState({ course: data.course + " " + "course" });
           this.setState({ txh: result });
           console.log(result);
@@ -93,10 +100,11 @@ class CertificateMain extends Component {
       <div>
         <Router>
           <Navhead />
+          
           <Route
-            path="/certificate"
+            path="/certificate/:productId"
             exact
-            render={() => <Forms addcertificate={this.add} />}
+            render={(props) => <Forms addcertificate={this.add} {...props} />}
           />
           <Route
             path="/verify"

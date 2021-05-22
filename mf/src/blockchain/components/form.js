@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import b1 from "../b3.jpg";
+import { isAutheticated } from "../../auth/helper/index"
+import { getProduct } from "../../admin/helper/adminapicall";
 class Forms extends Component {
   canBeSubmitted() {
     const { fname, lname, course, email } = this.state;
     return (
       fname.length > 0 &&
-      lname.length > 0 &&
       course.length > 0 &&
       email.length > 0
     );
@@ -24,22 +25,40 @@ class Forms extends Component {
   };
 
   state = {
-    fname: "",
-    lname: "",
+    fname: isAutheticated().user.name,
+    email: isAutheticated().user.email,
     course: "",
-    email: ""
   };
+
+  componentDidMount() {
+    console.log('mounted')
+    this.loadCourseData(this.props.match.params.productId);
+  }
+
+
+  async loadCourseData(productId) {
+    //added line 30
+    await getProduct(productId).then((data) => {
+      this.setState({
+        course:data.name
+      });
+
+    });
+  }
+
+
+
   render() {
     const isEnabled = this.canBeSubmitted();
     return (
       <div
         className="container-fluid "
-        // style={{
-        //   height: "100vh%",
-        //   //backgroundImage: `url(${b1})`,
-        //   background: `url(${b1}) no-repeat `,
-        //   backgroundSize: "cover"
-        // }}
+      // style={{
+      //   height: "100vh%",
+      //   //backgroundImage: `url(${b1})`,
+      //   background: `url(${b1}) no-repeat `,
+      //   backgroundSize: "cover"
+      // }}
       >
         <h1
           style={{
@@ -50,7 +69,7 @@ class Forms extends Component {
           }}
           className="mb-5 pt-3"
         >
-          Create certificates on Blockchain
+          Your certificate on Blockchain
         </h1>
         <div
           style={{ marginBottom: "117px", background: "rgba(255,255,255,0.5)" }}
@@ -65,6 +84,8 @@ class Forms extends Component {
           >
             Enter the Certificate details
           </h2>
+          {/* <button onClick={this.addcertificate}></button> */}
+
           <Form onSubmit={this.addcertificate}>
             <Form.Group>
               <Form.Control
@@ -73,15 +94,6 @@ class Forms extends Component {
                 value={this.state.fname}
                 onChange={this.handleChange}
                 placeholder="First name"
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                name="lname"
-                value={this.state.lname}
-                onChange={this.handleChange}
-                placeholder="Last name"
               />
             </Form.Group>
             <Form.Group>
