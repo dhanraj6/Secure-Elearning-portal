@@ -15,7 +15,7 @@ class Certificate extends Component {
       <div className="w-100 pc ">
         <div id="printcertificate" className="w-75 cert">
           <div id="fname">
-            <span>{this.props.sname}</span>
+            <h3>{this.props.sname}</h3>
           </div>
           <div id="course">
             <style>{`@media print {#course{color:red;}}`}</style>
@@ -24,12 +24,13 @@ class Certificate extends Component {
           <div id="txh">
             <span>{this.props.txh}</span>
           </div>
+          {/*
           <div id="id">
             <span>{this.props.id}</span>
-          </div>
+          </div> */}
         </div>
         <Button
-          className="btn"
+          className="btne"
           onClick={this.onclickprint}
           variant="success"
           type="submit"

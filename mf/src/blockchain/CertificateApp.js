@@ -62,7 +62,7 @@ class CertificateMain extends Component {
         else {
           this.setState({ name: isAutheticated().user.name});
           this.setState({ course: data.course + " " + "course" });
-          this.setState({ txh: result });
+         
           console.log(result);
           certcontract.methods
             .getid()
@@ -71,6 +71,7 @@ class CertificateMain extends Component {
               if (!error) console.log(result);
               else console.log(error);
             });
+            this.setState({ txh: result });
           //certcontract.events.added({}, (error, ev) => {
           //to use event below 2 lines
           //let key = Object.keys(ev[1].returnValues)[1];

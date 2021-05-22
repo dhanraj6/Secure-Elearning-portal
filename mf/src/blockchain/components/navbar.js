@@ -11,10 +11,7 @@ class Navhead extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Item className="mt-2 ml-2 mr-3">
-              <Link to="/reg">Register</Link>
-            </Nav.Item>
-            <Nav.Item className="mt-2 ml-2 mr-3">
-              <Link to="/verify">Verify</Link>
+              <Link to="/verify">Verify Hash</Link>
             </Nav.Item>
             <Nav.Item className="mt-2 mr-3">
               <Link to="/view">View Certificate</Link>

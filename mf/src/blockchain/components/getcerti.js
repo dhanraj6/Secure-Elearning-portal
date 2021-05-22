@@ -49,20 +49,7 @@ class Getcert extends Component {
           width: "100%"
         }}
         className="container-fluid "
-      >
-        <div className=" mx-auto w-50">
-          <h1
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              fontWeight: "bold"
-            }}
-            className=" mt-3 mb-4"
-          >
-            Verify the Certificate
-          </h1>
-          </div>
-            
+      >    
         <div className=" mx-auto w-50 mb-5">
           <h1
             style={{

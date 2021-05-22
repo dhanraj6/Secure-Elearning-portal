@@ -1,6 +1,6 @@
 .cert {
   height: 85vh;
-  background: url("cert.png") no-repeat;
+  background: url("./cert2.jpg") no-repeat;
   background-size: cover;
   margin-left: 150px;
 }
@@ -11,21 +11,21 @@
   background-size: cover;
 }
 #fname {
-  font-size: 55px;
-  padding-top: 315px;
-  padding-left: 20px;
+  font-size: 30px;
+  padding-top: 285px;
+  padding-left: 520px;
 }
 
 #course {
   font-size: 23px;
-  margin-top: 3px;
-  margin-left: 25px;
+  padding-top: 75px;
+  margin-left: 625px;
   font-weight: bold;
 }
 
 #txh {
-  margin-top: 90px;
-  margin-left: -300px;
+  padding-top: 75px;
+  margin-left: 300px;
 }
 
 #id {
@@ -35,4 +35,9 @@
 
 .btn {
   margin-top: 10px;
+}
+
+.btne {
+  padding-top: 7px;
+  margin-left: 600px;
 }
