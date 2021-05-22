@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "get-video-duration": "^3.0.2"
+  }
+}
