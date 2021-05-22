@@ -11,6 +11,8 @@ import abc from "../assets/uploads/Python.mp4"
 import { isAutheticated } from "../auth/helper/index";
 import ResponsivePlayer from './Lessons/VideoPlayer'
 import { Redirect } from "react-router-dom";
+import axios from "axios";
+import Comments from "./Comments"; 
 
 
 
@@ -22,7 +24,7 @@ export default function CourseMain({ match, showCertificate = true }) {
     const [certificateStatus, setCertificateStatus] = useState("Please watch the video to get certificate")
     const [styling, setStyling] = useState("markerNot")
     const [redirect, setRedirect] = useState(false);
-
+    const [CommentLists, setCommentLists] = useState([])
 
 
     const handleWatchComplete = ({ played }) => {
@@ -84,6 +86,12 @@ export default function CourseMain({ match, showCertificate = true }) {
         resource,
     } = values;
 
+    
+    const videoId = match.params.productId
+
+    const videoVariable = {
+        videoId: videoId
+    }
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -105,6 +113,16 @@ export default function CourseMain({ match, showCertificate = true }) {
                 });
             }
         });
+
+        axios.post('http://localhost:8000/api/comment/getComments', videoVariable)
+        .then(response => {
+            if (response.data.success) {
+                console.log('response.data.comments',response.data.comments)
+                setCommentLists(response.data.comments)
+            } else {
+                alert('Failed to get video Info')
+            }
+        })
     };
 
     //const downloadFile = useFileDownloader();
@@ -114,6 +132,10 @@ export default function CourseMain({ match, showCertificate = true }) {
     useEffect(() => {
         preload(match.params.productId);
     }, []);
+
+    const updateComment =  (newComment) => {
+        setCommentLists(CommentLists.concat(newComment))
+    }
 
     console.log(resource)
 
@@ -151,6 +173,7 @@ export default function CourseMain({ match, showCertificate = true }) {
                 <div style={{ textAlign: "center" }}>
                     <button className='btn btn-success btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
                 </div>
+                <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
                 <hr></hr>
             </div>
         </Base>
