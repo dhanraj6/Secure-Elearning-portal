@@ -82,13 +82,19 @@ class Forms extends Component {
             }}
             className="mb-2"
           >
-            Enter the Certificate details
+            Certificate details
           </h2>
           {/* <button onClick={this.addcertificate}></button> */}
-
+          <div className="w-50 container pt-3 pb-3 mx-auto">
+          <ul className="list-group">
+            <li className="list-group-item">Name: {this.state.fname}</li>
+            <li className="list-group-item">Email: {this.state.email}</li>
+            <li className="list-group-item">Course: {this.state.course}</li>
+          </ul>
+        </div>
           <Form onSubmit={this.addcertificate}>
             <Form.Group>
-              <Form.Control
+              <label
                 type="text"
                 name="fname"
                 value={this.state.fname}
@@ -97,7 +103,7 @@ class Forms extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Control
+              <label
                 type="email"
                 name="email"
                 value={this.state.email}
@@ -106,7 +112,7 @@ class Forms extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Control
+              <label
                 type="text"
                 name="course"
                 value={this.state.course}

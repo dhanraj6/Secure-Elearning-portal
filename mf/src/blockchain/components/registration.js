@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
+import { isAutheticated } from "../../auth/helper/index"
 class Reg extends Component {
   sendmail = event => {
     event.preventDefault();
     window.location.href = `mailto:${this.state.email}`;
   };
   state = {
-    email: "nskumavat@outlook.com"
+    email: isAutheticated().user.email,
   };
   render() {
     return (

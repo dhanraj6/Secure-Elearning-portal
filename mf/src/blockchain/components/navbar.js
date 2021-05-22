@@ -10,14 +10,8 @@ class Navhead extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Item className="mt-2 mr-2 ">
-              <Link to="/">Home</Link>
-            </Nav.Item>
             <Nav.Item className="mt-2 ml-2 mr-3">
               <Link to="/reg">Register</Link>
-            </Nav.Item>
-            <Nav.Item className="mt-2 ml-2 mr-3">
-              <Link to="/intro">How it works</Link>
             </Nav.Item>
             <Nav.Item className="mt-2 ml-2 mr-3">
               <Link to="/verify">Verify</Link>

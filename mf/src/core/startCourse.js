@@ -153,7 +153,7 @@ export default function CourseMain({ match, showCertificate = true }) {
             <source src={abc} type="video/mp4" />
         </video> */}
                 <ResponsivePlayer
-                    url={filePath}
+                    url={abc}
                     onProgress={handleWatchComplete}
                 />
                 <div>

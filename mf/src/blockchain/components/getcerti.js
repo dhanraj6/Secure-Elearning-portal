@@ -61,37 +61,8 @@ class Getcert extends Component {
           >
             Verify the Certificate
           </h1>
-          <Form
-            className="px-3 pt-4"
-            onSubmit={this.getcertificate}
-            style={{ background: "rgba(255,255,255,0.5)" }}
-          >
-            <Form.Group>
-              <Form.Control
-                type="text"
-                name="id"
-                value={this.state.id}
-                onChange={this.handleChange}
-                placeholder="Enter Certificate ID"
-              />
-            </Form.Group>
-            <Button
-              disabled={!isEnabledid}
-              className="mt-2 mb-3"
-              variant="primary"
-              type="submit"
-            >
-              Get certificate
-            </Button>
-          </Form>
-          {this.props.yes ? <CertFound details={this.props.details} /> : null}
-
-          <hr
-            className="mt-5 "
-            style={{ color: "red", backgroundColor: "red", height: 5 }}
-          />
-        </div>
-
+          </div>
+            
         <div className=" mx-auto w-50 mb-5">
           <h1
             style={{
