@@ -186,16 +186,16 @@ export default function CourseMain({ match, showCertificate = true }) {
                         (<div>
                             <hr></hr>
                             <p>Please watch the video completely to get your certificate</p>
-
-                            <hr></hr>
                         </div> )
                         }
 
                     {watchComplete && showCertificateButton(showCertificate)}
                 </div>
-                <hr></hr>
+                
                 {/* <h1>{creator}</h1> */}
                 {showCourseInfo()}
+                <br></br>
+                <br></br>
                 <div style={{ textAlign: "center" }}>
                     <button className='btn btn-warning btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
                 </div>
