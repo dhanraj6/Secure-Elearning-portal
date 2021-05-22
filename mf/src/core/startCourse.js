@@ -25,6 +25,7 @@ export default function CourseMain({ match, showCertificate = true }) {
     const [styling, setStyling] = useState("markerNot")
     const [redirect, setRedirect] = useState(false);
     const [CommentLists, setCommentLists] = useState([])
+    const [infoRedirect, setinfoRedirect] = useState(false);
 
 
     const handleWatchComplete = ({ played }) => {
@@ -60,6 +61,29 @@ export default function CourseMain({ match, showCertificate = true }) {
             </div>
         );
     };
+
+    const gotoInfo =()=>{
+        setinfoRedirect(true);
+      }
+    
+      const redirectInfo = infoRedirect =>{
+        if(infoRedirect){
+          return <Redirect to={`/assesment/${match.params.productId}`} />
+        }
+      }
+    
+      const showCourseInfo =()  => {
+        return (
+          true && (
+            <button
+              onClick={gotoInfo}
+              className="btn btn-success btn-lg"
+            >
+             Start Assesment
+            </button>
+          )
+        );
+      };
 
     const [values, setValues] = useState({
         name: "",
@@ -143,6 +167,7 @@ export default function CourseMain({ match, showCertificate = true }) {
         <Base title="" description="">
             <div className="text-center">
                 {redirectCertificate(redirect)}
+                {redirectInfo(infoRedirect)}
                 <hr></hr>
                 <h4> {name}</h4>
                 <hr></hr>
@@ -170,8 +195,9 @@ export default function CourseMain({ match, showCertificate = true }) {
                 </div>
                 <hr></hr>
                 {/* <h1>{creator}</h1> */}
+                {showCourseInfo()}
                 <div style={{ textAlign: "center" }}>
-                    <button className='btn btn-success btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
+                    <button className='btn btn-warning btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
                 </div>
                 <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
                 <hr></hr>

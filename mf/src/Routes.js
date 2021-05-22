@@ -21,6 +21,7 @@ import CourseDetails from "./core/courseDetails"
 import CourseMain from "./core/startCourse"
 import MyEnrolments from "./core/myenrolments"
 import CertificateMain from "./blockchain/CertificateApp"
+import Quiz from "./core/Assesment";
 
 
 const Routes = () => {
@@ -35,6 +36,7 @@ const Routes = () => {
         <Route path="/cart" exact component={Cart} />
         {/* <Route path="/certificate" exact component={Certificate} /> */}
         <PrivateRoute path="/product/:productId" exact component={CourseDetails} />
+        <PrivateRoute path="/assesment/:productId" exact component={Quiz} />
         <PrivateRoute path="/certificate/:productId" exact component={CertificateMain} />
         <PrivateRoute path="/course/enrolments" exact component={MyEnrolments} />
         <PrivateRoute path="/course/video/:productId" exact component={CourseMain} />
