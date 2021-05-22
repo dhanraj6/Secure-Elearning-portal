@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -7,54 +7,54 @@ class Quiz extends React.Component {
       
       var dataSet = [
         {
-          question: "What is 8 x 1?",
+          question: " Which type of JavaScript language is ___",
           answers: [
-            "1",
-            "8",
-            "16",
-            "9"
+            "Object-Oriented",
+            "Object-Based",
+            "Assembly-language",
+            "High-level"
           ],
           correct: 1
         },
         {
-          question: "Who is Steve Jobs?",
+          question: "Which one of the following also known as Conditional Expression:",
               answers: [
-                "CEO of Microsoft",
-                "Barber in NY",
-                "Movie Star",
-                "CEO of Apple"
+                "Alternative to if-else",
+                "Switch statement",
+                "If-then-else statement",
+                "immediate if"
               ],
               correct: 3
         },
          {
-              question: "Metallica is a ____ band",
+              question: "When interpreter encounters an empty statements, what it will do?",
               answers: [
-                "Blues",
-                "Hard-Rock",
-                "Jazz",
-                "Metal"
+                "Shows a warning",
+                "Prompts to complete the statement",
+                "Throws an error",
+                "Ignores the statements"
               ],
               correct: 3
             },
             {
-              question: "IS is a ____",
+              question: "The 'function' and  'var' are known as",
               answers: [
-                "Word",
-                "Band",
-                "Terror Group",
-                "Brand"
+                "Keywords",
+                "Data types",
+                "Declaration statements",
+                "Prototypes"
               ],
               correct: 2
             },
             {
-              question: "Who was Einstein",
+              question: "Which one of the following is the correct way for calling the JavaScript code?",
               answers: [
-                "A Scientist",
-                "A Dentist",
-                "A Serial Killer",
-                "None of the above"
+                "Preprocessor",
+                "Triggering Event",
+                "RMI",
+                "Function/Method"
               ],
-              correct: 0
+              correct: 3
             },
             {
               question: "JavaScript can be used in ____ development",
@@ -67,44 +67,44 @@ class Quiz extends React.Component {
               correct: 3
             },
             {
-              question: "Hitler was a",
+              question: "Which of the following type of a variable is volatile?",
               answers: [
-                "Mass Murderer",
-                "Dictator",
-                "Jew",
-                "None of the above",
-                "All of the above"
-              ],
-              correct: 4
-            },
-            {
-              question: "Korn is a",
-              answers: [
-                "Nu-Metal band",
-                "Religion",
-                "Singer"
+                "Mutable variable",
+                "Dynamic variable",
+                "Volatile variable",
+                "Immutable variable"
               ],
               correct: 0
             },
             {
-              question: "Windows computers are",
+              question: "In the JavaScript, which one of the following is not considered as an error?",
               answers: [
-                "Horrible",
-                "Great",
-                "Cheap",
-                "Invented by Bill Gates"
+                "Syntax error",
+                "Missing of semicolons",
+                "Division by zero",
+                "Missing of Bracket"
               ],
-              correct: 3
+              correct: 2
             },
             {
-              question: "The BigBan stands in",
+              question: "Which of the following number object function returns the value of the number?",
               answers: [
-                "Egypt",
-                "London",
-                "Amsterdam",
-                "NewYork"
+                "toString()",
+                "valueOf()",
+                "toLocaleString()",
+                "toPrecision()"
               ],
               correct: 1
+            },
+            {
+              question: "In JavaScript the x===y statement implies that",
+              answers: [
+                "Both x and y are equal in value, type and reference address as well",
+                "Both are x and y are equal in value only",
+                "Both are equal in the value and data type",
+                "Both are not same at all"
+              ],
+              correct: 2
             },
       ];
       
@@ -126,6 +126,11 @@ class Quiz extends React.Component {
       }
       
       if (this.state.current == 9) {
+        if(this.state.correct/10 > 0.7){
+            alert("you passed the Test");
+            window.location.href = "/course/enrolments";
+        }
+        alert("Try again!")
         this.setState({current: 0})
         this.setState({incorrect: 0})
         this.setState({correct: 0})
@@ -138,8 +143,7 @@ class Quiz extends React.Component {
       return(
         <div>
           <ScoreArea correct={this.state.correct} incorrect={this.state.incorrect} />
-          <QuizArea handleClick={this.handleClick} dataSet={this.state.dataSet[this.state.current]} />
-          
+          <QuizArea handleClick={this.handleClick} dataSet={this.state.dataSet[this.state.current]} />       
         </div>
       )
     }
@@ -147,7 +151,8 @@ class Quiz extends React.Component {
   
   function Question(props) {
     var style = {
-      color: "red",
+        width: "270%",
+        color: "white",
     }
     return (
       <h1 style={style}>{props.dataSet.question}</h1>
