@@ -11,7 +11,7 @@ const SCard = ({ product,courseInfo=true, addtoCartRent=true, addtoCart = true, 
   const [error, setError] = useState(false);
   const [courseRedirect, setCourseRedirect] = useState(false);
 
-  const cartTitle = sProduct ? sProduct.name : "A photo from pexels";
+  const cartTitle = sProduct ? sProduct.name : "The Course heading";
   const cartDescrption = sProduct ? sProduct.description : "Default description";
 
   const loadProduct = (product) => {

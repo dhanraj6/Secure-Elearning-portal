@@ -1,29 +1,78 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
+import { API } from "../backend";
 import Base from "./Base";
-import { getProduct} from "../admin/helper/adminapicall";
+import Card from "./Card";
+import { getProduct } from "../admin/helper/adminapicall";
 import "./style.css"
-import abc from  "../assets/uploads/Python.mp4"
-import Comments from "./Comments"; 
-import axios from "axios";
-import Lesson from "./Lessons/Lesson";
-export default function CourseMain({match}) {
+import abc from "../assets/uploads/Python.mp4"
+//import useFileDownloader from "hooks/useFileDownloader"
+// import Lesson from "./Lessons/Lesson";
+import { isAutheticated } from "../auth/helper/index";
+import ResponsivePlayer from './Lessons/VideoPlayer'
+import { Redirect } from "react-router-dom";
 
 
-    const [CommentLists, setCommentLists] = useState([])
+
+export default function CourseMain({ match, showCertificate = true }) {
+    const userId = isAutheticated() && isAutheticated().user._id;
+
+    //Lesson parameter:
+    const [watchComplete, setWatchComplete] = useState(false)
+    const [certificateStatus, setCertificateStatus] = useState("Please watch the video to get certificate")
+    const [styling, setStyling] = useState("markerNot")
+    const [redirect, setRedirect] = useState(false);
+
+
+
+    const handleWatchComplete = ({ played }) => {
+        if (played >= 0.9 && !watchComplete) {
+            setWatchComplete(true);
+            setCertificateStatus("Course Completed Get Certificate")
+            setStyling("markerIs")
+        }
+    }
+
+
+    const gotoCetificate = () => {
+        setRedirect(true);
+    }
+
+
+
+    const redirectCertificate = redirect => {
+        if (redirect) {
+            return <Redirect to={`/certificate/${match.params.productId}`} />;
+        }
+    };
+
+
+
+    const showCertificateButton = showCertificate => {
+        return (
+            showCertificate &&
+            <div>
+                <button className={styling} onClick={gotoCetificate} >
+                    {certificateStatus}
+                </button>
+            </div>
+        );
+    };
 
     const [values, setValues] = useState({
         name: "",
         description: "",
+        // creator: "",
         price: "",
         stock: "",
         photo: "",
         filePath: "",
-        resource:"",
+        resource: "",
     })
 
     const {
         name,
+        // creator,
         description,
         price,
         stock,
@@ -35,11 +84,6 @@ export default function CourseMain({match}) {
         resource,
     } = values;
 
-    const videoId = match.params.productId
-
-    const videoVariable = {
-        videoId: videoId
-    }
 
     const preload = (productId) => {
         getProduct(productId).then((data) => {
@@ -51,6 +95,7 @@ export default function CourseMain({match}) {
                     prodId: data._id,
                     name: data.name,
                     description: data.description,
+                    // creator:data.creator,
                     price: data.price,
                     category: data.category._id,
                     stock: data.stock,
@@ -60,47 +105,54 @@ export default function CourseMain({match}) {
                 });
             }
         });
-
-
-        axios.post('http://localhost:8000/api/comment/getComments', videoVariable)
-            .then(response => {
-                if (response.data.success) {
-                    console.log('response.data.comments',response.data.comments)
-                    setCommentLists(response.data.comments)
-                } else {
-                    alert('Failed to get video Info')
-                }
-            })
     };
+
+    //const downloadFile = useFileDownloader();
+    //const download = (resource) => downloadFile(resource);
 
 
     useEffect(() => {
         preload(match.params.productId);
     }, []);
 
-  console.log(resource)
+    console.log(resource)
 
-  const updateComment =  (newComment) => {
-    setCommentLists(CommentLists.concat(newComment))
-  }
-
-
-  return (
-    <Base title="" description="">
-      <div className="text-center">
-        <hr></hr>
-        <h4 style={{fontWeight:"bold"}}>{name}</h4>
-        <hr></hr>
-        {/* <h4>resource : {resource}</h4> */}
-        <h5>Video</h5>
-        {/* <video style={{ width: '100%',height:"80vh" }} controls >
+    return (
+        <Base title="" description="">
+            <div className="text-center">
+                {redirectCertificate(redirect)}
+                <hr></hr>
+                <h4> {name}</h4>
+                <hr></hr>
+                <hr></hr>
+                {/* <h4>resource : {resource}</h4> */}
+                <h4>Video</h4>
+                {/* <video style={{ width: '100%' }} controls >
             <source src={abc} type="video/mp4" />
-        </video>  */}
-         <Lesson url={filePath} /> 
-        <p style={{fontWeight:"bold",width:"80%",textAlign:"center",margin:"0 auto"}}> {description}</p>
-        <Comments CommentLists={CommentLists} postId={match.params.productId}  refreshFunction={updateComment} />
-        <hr></hr>    
-      </div>
-    </Base>
-  );
+        </video> */}
+                <ResponsivePlayer
+                    url={filePath}
+                    onProgress={handleWatchComplete}
+                />
+                <div>
+                    {!watchComplete &&
+                        (<div>
+                            <hr></hr>
+                            <p>Please watch the video completely to get your certificate</p>
+
+                            <hr></hr>
+                        </div> )
+                        }
+
+                    {watchComplete && showCertificateButton(showCertificate)}
+                </div>
+                <hr></hr>
+                {/* <h1>{creator}</h1> */}
+                <div style={{ textAlign: "center" }}>
+                    <button className='btn btn-success btn-lg' ><a href="http://www.africau.edu/images/default/sample.pdf" download text-decoration="none" target="../assets">Download Resources</a></button>
+                </div>
+                <hr></hr>
+            </div>
+        </Base>
+    );
 }
