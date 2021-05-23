@@ -126,7 +126,7 @@ class Quiz extends React.Component {
       }
       
       if (this.state.current == 9) {
-        if(this.state.correct/10 > 0.7){
+        if((this.state.correct/10) > 0.7){
             alert("you passed the Test");
             window.location.href = "/course/enrolments";
         }

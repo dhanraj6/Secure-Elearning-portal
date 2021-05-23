@@ -57,7 +57,7 @@ const Paymentb = ({products,setReload = f => f, reload = undefined}) => {
           nonce = data.nonce;
           const paymentData = {
             paymentMethodNonce: nonce,
-            amount: getAmount()
+            amount: getAmount(),
           };
           processPayment(userId, token, paymentData)
             .then(response => {
@@ -66,7 +66,8 @@ const Paymentb = ({products,setReload = f => f, reload = undefined}) => {
               const orderData = {
                 products: products,
                 transaction_id: response.transaction.id,
-                amount: response.transaction.amount
+                amount: response.transaction.amount,
+                buyType : getPurchaseType()
               };
               createOrder(userId, token, orderData);
               cartEmpty(() => {
@@ -94,6 +95,23 @@ const Paymentb = ({products,setReload = f => f, reload = undefined}) => {
         });
         return amount;
       };
+
+
+      const getPurchaseType = () => {
+        let buyType = 0;
+        products.map(p => {
+          if(p.buyType==1){
+            buyType = 1;
+          }
+          if(p.buyType==0){
+            buyType = 0;
+            }
+        });
+        return buyType;
+      };
+
+
+      
     
     return (
         <div>
